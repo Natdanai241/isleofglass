@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>เกาะแห่งกระจก · Isle of Glass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --parch:#f6ecd4;--parch2:#eadbb6;--ink:#3b2f24;--ink2:#6e5c47;--lead:#2c3036;
+  --gold:#b78a3e;--gold2:#dcb56c;--bad:#c0392b;--ok:#2f8f6b;--blue:#3f6fb5;
+  --shadow:0 18px 40px -20px rgba(70,45,15,.55);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:'Sarabun','Noto Sans Thai','Leelawadee UI',system-ui,sans-serif;color:var(--ink);
+  background-color:#e8d9b5;
+  background-image:
+    radial-gradient(ellipse at 15% -10%,rgba(255,255,255,.75),transparent 55%),
+    radial-gradient(ellipse at 110% 110%,rgba(130,85,30,.22),transparent 55%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42 0 0 0 0 .32 0 0 0 0 .18 0 0 0 .10 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  -webkit-tap-highlight-color:transparent;
+}
+button{font:inherit;color:inherit}
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:8px;padding:10px 14px;
+  padding-top:max(10px,env(safe-area-inset-top));
+  background:rgba(250,243,226,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(183,138,62,.35)}
+.brand{flex:1;text-align:center;line-height:1.05}
+.brand-th{font-family:'Charm',serif;font-weight:700;font-size:1.55rem;color:#4a3524}
+.brand-en{display:block;font-size:.62rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold)}
+.icon-btn{width:42px;height:42px;flex:none;border-radius:50%;border:1px solid rgba(183,138,62,.55);cursor:pointer;
+  background:linear-gradient(180deg,#fffaf0,#efe2c4);box-shadow:0 3px 8px -5px rgba(60,40,10,.6);font-weight:700;font-size:1.05rem;
+  display:grid;place-items:center;transition:transform .15s}
+.icon-btn:active{transform:scale(.94)}
+.icon-btn svg{width:20px;height:20px;fill:var(--ink)}
+main{max-width:1120px;margin:0 auto;padding:14px 12px 40px}
+.screen{display:none}
+.screen.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.btn{border:none;border-radius:14px;padding:11px 18px;cursor:pointer;font-weight:600;
+  background:linear-gradient(180deg,#fffdf6,#efe0bf);
+  box-shadow:0 0 0 1px rgba(183,138,62,.6) inset,0 5px 12px -7px rgba(60,40,10,.6);transition:transform .12s,filter .2s}
+.btn:hover{filter:brightness(1.03)}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn.primary{background:linear-gradient(180deg,#5587cc,#2f5c9c);color:#fff;box-shadow:0 0 0 1px #24497d inset,0 6px 14px -6px rgba(30,60,110,.7)}
+.btn.ghost{background:rgba(255,255,255,.35)}
+.btn.big{padding:14px 22px;font-size:1.05rem;min-width:200px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+/* ---------- HOME ---------- */
+.hero{text-align:center;padding:18px 8px 10px}
+#rosette{width:min(240px,62vw);height:auto;filter:drop-shadow(0 14px 22px rgba(60,40,10,.35))}
+#rosette .spin{animation:spin 80s linear infinite;transform-origin:0 0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero h1{font-family:'Charm',serif;font-size:clamp(2.2rem,8vw,3.4rem);margin:.2em 0 .05em;color:#3d2b1c}
+.tagline{max-width:520px;margin:0 auto 18px;color:var(--ink2);line-height:1.6}
+.hero-actions{display:flex;flex-direction:column;align-items:center;gap:10px}
+.home-progress{margin-top:18px;color:var(--ink2);font-size:.95rem}
+/* ---------- LEVELS ---------- */
+.section-head h2{font-family:'Charm',serif;font-size:2rem;margin:.2em 0 0}
+.section-head p{margin:.2em 0 14px;color:var(--ink2)}
+.chapter-list{display:grid;gap:14px}
+@media(min-width:760px){.chapter-list{grid-template-columns:1fr 1fr}}
+.chapter{background:rgba(255,250,238,.72);border-radius:20px;padding:16px;box-shadow:0 0 0 1px rgba(183,138,62,.4),var(--shadow);backdrop-filter:blur(6px)}
+.chapter-head{display:flex;align-items:center;gap:12px}
+.chapter-glass{width:44px;height:44px;border-radius:50% 50% 8px 8px;background:linear-gradient(140deg,rgba(255,255,255,.55),transparent 55%),var(--c);border:4px solid var(--lead);flex:none}
+.chapter-name{font-weight:700;font-size:1.08rem}
+.chapter-sub{color:var(--ink2);font-size:.9rem}
+.chapter-desc{margin:10px 0 12px;color:var(--ink2);font-size:.92rem;line-height:1.55}
+.level-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.level-btn{border:none;border-radius:14px;padding:10px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;
+  background:linear-gradient(180deg,#fffdf7,#f0e3c5);box-shadow:0 0 0 1px rgba(183,138,62,.55) inset;transition:transform .12s}
+.level-btn:active{transform:scale(.96)}
+.level-btn.done{background:linear-gradient(160deg,rgba(255,255,255,.5),transparent 60%),#cfe3d6}
+.level-btn.locked{opacity:.45;cursor:not-allowed}
+.lv-num{font-size:1.3rem;font-weight:700}
+.lv-meta{font-size:.72rem;color:var(--ink2)}
+.lv-stars{font-size:.85rem;color:var(--gold);letter-spacing:1px;min-height:1.1em}
+/* ---------- GAME ---------- */
+.game-layout{display:grid;gap:14px}
+@media(min-width:920px){.game-layout{grid-template-columns:minmax(0,1.4fr) minmax(300px,1fr);align-items:start}}
+.level-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.lvl-title{font-family:'Charm',serif;font-size:1.6rem;font-weight:700;line-height:1.1}
+.lvl-sub{color:var(--ink2);font-size:.9rem}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:.8rem;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.6);box-shadow:0 0 0 1px rgba(183,138,62,.45) inset;white-space:nowrap}
+.chip.easy{background:#d9eedf}.chip.medium{background:#f6e6c2}.chip.hard{background:#f3cfc6}
+.mono{font-variant-numeric:tabular-nums}
+.board-frame{position:relative;padding:10px;border-radius:24px;overflow:hidden;
+  background:linear-gradient(145deg,#fdf7e8,#ead9b2);
+  box-shadow:0 1px 0 #fff inset,0 0 0 1px rgba(183,138,62,.5),0 0 0 7px rgba(255,248,230,.55),var(--shadow)}
+.board-svg{display:block;width:100%;height:auto;max-height:68vh;touch-action:none;user-select:none;-webkit-user-select:none}
+.board-frame.locked .board-svg{cursor:default}
+.shards{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.shard{position:absolute;top:-24px;width:12px;height:18px;opacity:0;
+  clip-path:polygon(50% 0,100% 38%,72% 100%,0 72%);animation:fall 2.4s cubic-bezier(.3,.6,.5,1) forwards}
+@keyframes fall{0%{opacity:0;transform:translate(0,0) rotate(0)}8%{opacity:1}100%{opacity:.9;transform:translate(var(--dx),720px) rotate(var(--rot))}}
+.cell{fill:#f9f1de;transition:fill .35s ease,fill-opacity .5s}
+.cell.glass{fill-opacity:.84}
+.board-frame.won .cell.glass{fill-opacity:1}
+.cell.bad{fill:#f2c5b9}
+.cell.flash{animation:cellFlash .55s ease-in-out 3}
+@keyframes cellFlash{50%{fill:#e57b66}}
+.pencil{stroke:#a38f6e;stroke-width:1.4;stroke-linecap:round;opacity:.7}
+.vert{fill:#8c7a5f}
+.wall{opacity:0;transition:opacity .15s}
+.wall.on{opacity:1}
+.wall line{stroke-linecap:round}
+.wall .lead{stroke:#2d3137;stroke-width:7.5}
+.wall .core{stroke:#7a838e;stroke-width:2}
+.wall.on .lead,.wall.on .core{stroke-dasharray:100;animation:draw .28s ease-out}
+@keyframes draw{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.wall.given .lead{stroke:#1d1915;stroke-width:8.5}
+.wall.given .core{stroke:var(--gold2);stroke-width:2.4}
+.wall.dangling .lead{stroke:#b6382b;animation:pulse 1.1s ease-in-out infinite}
+.wall.flash .lead{stroke:#e0533d}
+@keyframes pulse{50%{opacity:.55}}
+.border-lead{fill:none;stroke:#29241f;stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+.border-core{fill:none;stroke:var(--gold);stroke-width:2.2;stroke-linecap:round;opacity:.9}
+.sheen{pointer-events:none}
+.sweep{transform-box:fill-box;transform:translateX(-110%);pointer-events:none}
+.board-frame.won .sweep{animation:sweep 1.9s ease-out .1s}
+@keyframes sweep{to{transform:translateX(110%)}}
+.clue circle{fill:#fff8e6;stroke:var(--gold);stroke-width:2.2;transition:fill .3s,stroke .3s}
+.clue path{fill:none;stroke:#3b2f24;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.clue.ok circle{stroke:var(--ok);fill:#e6f5ec}
+.clue.bad circle{stroke:var(--bad);fill:#ffd9d0}
+.hover-line{stroke:#d9a441;stroke-width:9;stroke-linecap:round;opacity:.45;pointer-events:none}
+.hint-add,.hint-remove{stroke-width:14;stroke-linecap:round;pointer-events:none;animation:hintPulse 1.8s ease-out forwards}
+.hint-add{stroke:#3fbf8f}.hint-remove{stroke:#e0533d}
+@keyframes hintPulse{0%{opacity:0}15%{opacity:.95}60%{opacity:.6}100%{opacity:0}}
+.toolrow{display:flex;justify-content:center;margin:12px 0 8px}
+.seg{display:inline-flex;padding:4px;border-radius:14px;background:rgba(255,255,255,.5);box-shadow:0 0 0 1px rgba(183,138,62,.45) inset}
+.seg-btn{border:none;background:transparent;padding:7px 14px;border-radius:10px;cursor:pointer;font-weight:600;color:var(--ink2)}
+.seg-btn.active{background:linear-gradient(180deg,#fffdf6,#ecdcb7);color:var(--ink);box-shadow:0 2px 6px -3px rgba(60,40,10,.6)}
+.toolbar{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.tool{border:none;border-radius:14px;padding:8px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;
+  background:linear-gradient(180deg,#fffdf6,#efe0bf);box-shadow:0 0 0 1px rgba(183,138,62,.55) inset,0 4px 10px -7px rgba(60,40,10,.6);font-size:.82rem;font-weight:600;transition:transform .12s}
+.tool:active{transform:scale(.96)}
+.tool svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tool.accent{background:linear-gradient(180deg,#5587cc,#2f5c9c);color:#fff}
+.tool.accent svg{stroke:#fff}
+.tool:disabled{opacity:.4;cursor:not-allowed}
+.side-col{display:grid;gap:12px}
+.panel{background:rgba(255,250,238,.74);border-radius:20px;padding:14px;box-shadow:0 0 0 1px rgba(183,138,62,.4),var(--shadow);backdrop-filter:blur(6px)}
+.panel h3{margin:0 0 10px;font-family:'Charm',serif;font-size:1.35rem}
+.rule-card{padding:10px 12px;border-radius:14px;background:linear-gradient(160deg,rgba(255,255,255,.75),rgba(255,255,255,.35));box-shadow:0 0 0 1px rgba(183,138,62,.35) inset;margin-bottom:8px}
+.rule-top{display:flex;align-items:center;gap:10px}
+.rule-icon{width:34px;height:34px;flex:none;display:grid;place-items:center}
+.num-badge{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;background:radial-gradient(circle at 35% 30%,#8fb4ea,#2f5c9c);border:3px solid var(--lead)}
+.rule-title{flex:1;font-weight:700}
+.rule-status{font-size:.8rem;font-weight:700;padding:3px 9px;border-radius:999px;background:#eee3c9;white-space:nowrap}
+.rule-status.ok{background:#d3eedd;color:#1f6b4d}.rule-status.bad{background:#f7d0c7;color:#9b2d20}
+.rule-desc{font-size:.88rem;color:var(--ink2);margin-top:6px;line-height:1.5}
+.glyphs{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;align-items:flex-end}
+.glyph{display:block}
+.prov{display:inline-block;font-size:.68rem;font-weight:700;margin-left:6px;padding:1px 7px;border-radius:999px;background:#efe0f7;color:#6a3d8a;vertical-align:middle}
+.prov-note{font-size:.78rem;color:var(--ink2);margin:6px 2px 0}
+.feedback{min-height:1.5em;line-height:1.55;font-size:.95rem}
+.feedback.ok{color:var(--ok)}.feedback.bad{color:var(--bad)}.feedback.info{color:#2f5c9c}
+.error-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+.error-list li{padding:8px 10px;border-radius:12px;font-size:.88rem;line-height:1.45;cursor:pointer;background:#fbe3dd;box-shadow:0 0 0 1px rgba(192,57,43,.25) inset}
+.error-list li.soft{background:#f3ead4;box-shadow:0 0 0 1px rgba(183,138,62,.35) inset}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);text-align:center}
+.stats b{display:block;font-size:1.35rem}
+.stats span{font-size:.8rem;color:var(--ink2)}
+.modal{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(40,28,15,.5);backdrop-filter:blur(4px)}
+.modal-card{position:relative;width:min(560px,100%);max-height:90vh;overflow:auto;border-radius:24px;padding:22px 20px 18px;
+  background:linear-gradient(160deg,#fffaf0,#f0e2c2);box-shadow:0 0 0 1px rgba(183,138,62,.6),0 30px 60px -20px rgba(40,25,5,.6);animation:pop .3s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+.modal-card h2{font-family:'Charm',serif;font-size:1.8rem;margin:.1em 0 .3em}
+.modal-x{position:absolute;top:10px;right:12px;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.6);font-size:1.3rem;cursor:pointer}
+.modal-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-top:14px}
+.tut-step{font-size:.8rem;color:var(--gold);font-weight:700;letter-spacing:.1em}
+.tut-demo{display:flex;justify-content:center;margin:6px 0 10px}
+.tut-demo .board-svg{max-height:210px;width:auto;max-width:100%}
+.tut-text{line-height:1.7}
+.tut-text .red{color:var(--bad);font-weight:700}
+.tut-dots{display:flex;gap:6px;justify-content:center;margin-top:12px}
+.tut-dots i{width:8px;height:8px;border-radius:50%;background:#d8c7a0}
+.tut-dots i.on{background:var(--gold);transform:scale(1.25)}
+.vic-stars{text-align:center;font-size:2.6rem;letter-spacing:6px;color:#d8c7a0}
+.vic-stars .on{color:#e0a43a;text-shadow:0 0 12px rgba(224,164,58,.6)}
+.vic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin:10px 0}
+.vic-grid div{background:rgba(255,255,255,.55);border-radius:14px;padding:8px}
+.vic-grid b{display:block;font-size:1.2rem}
+.opt-label{font-weight:700;margin:12px 0 6px}
+.seg.wrap{flex-wrap:wrap}
+.setting{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed rgba(183,138,62,.4)}
+.setting input{width:22px;height:22px;accent-color:#2f5c9c}
+.test-list{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:.88rem}
+.test-list li{padding:7px 10px;border-radius:10px;background:#d8efe0}
+.test-list li.fail{background:#f7d0c7}
+.about{font-size:.85rem;color:var(--ink2);line-height:1.6}
+.loading{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(246,236,212,.82);backdrop-filter:blur(5px)}
+.spinner{width:64px;height:64px;border-radius:50%;border:6px solid rgba(183,138,62,.25);border-top-color:#3f6fb5;border-right-color:#c8485a;animation:spin 1s linear infinite}
+.loading p{font-weight:600}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:90;background:#3b2f24;color:#fff8e6;padding:10px 18px;border-radius:14px;box-shadow:var(--shadow);font-size:.92rem;max-width:90vw}
+.error-banner{position:sticky;top:64px;z-index:40;margin:8px auto;max-width:1100px;display:flex;gap:10px;align-items:center;justify-content:space-between;background:#fbe0d9;color:#8c2618;padding:10px 14px;border-radius:14px;box-shadow:0 0 0 1px rgba(192,57,43,.4)}
+.error-banner button{border:none;background:#8c2618;color:#fff;border-radius:10px;padding:6px 12px;cursor:pointer}
+@media(max-width:420px){.tool{font-size:.74rem}.btn.big{min-width:0;width:100%}.hero-actions{padding:0 10px}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="app">
+<header class="topbar">
+  <button class="icon-btn" id="btnHome" aria-label="หน้าหลัก" title="หน้าหลัก"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></button>
+  <div class="brand"><span class="brand-th">เกาะแห่งกระจก</span><span class="brand-en">Isle of Glass</span></div>
+  <button class="icon-btn" id="btnHelp" aria-label="วิธีเล่น" title="วิธีเล่น">?</button>
+  <button class="icon-btn" id="btnSettings" aria-label="ตั้งค่า" title="ตั้งค่า">⚙</button>
+</header>
+<div id="errorBanner" class="error-banner" role="alert" hidden><span id="errorText"></span><button id="errorClose">ปิด</button></div>
+
+<main>
+  <section id="screenHome" class="screen active">
+    <div class="hero">
+      <svg id="rosette" viewBox="-110 -110 220 220" aria-hidden="true"></svg>
+      <h1>เกาะแห่งกระจก</h1>
+      <p class="tagline">ปริศนาแบ่งพื้นที่บนหน้าต่างกระจกสี — วาดเส้นตะกั่วแบ่งกระดาน ให้กระจกทุกชิ้นเป็นไปตามกฎของหน้าต่าง</p>
+      <div class="hero-actions">
+        <button class="btn primary big" id="btnContinue">เล่นต่อ</button>
+        <button class="btn big" id="btnLevels">เลือกด่าน</button>
+        <button class="btn big" id="btnRandom">ปริศนาสุ่ม</button>
+        <button class="btn big ghost" id="btnTutorial">วิธีเล่น</button>
+      </div>
+      <div class="home-progress" id="homeProgress"></div>
+    </div>
+  </section>
+
+  <section id="screenLevels" class="screen">
+    <div class="section-head"><h2>แผนที่เกาะ</h2><p>บูรณะหน้าต่างทีละบานเพื่อปลดล็อกด่านถัดไป</p></div>
+    <div id="chapterList" class="chapter-list"></div>
+  </section>
+
+  <section id="screenGame" class="screen">
+    <div class="game-layout">
+      <div class="board-col">
+        <div class="level-bar">
+          <div><div id="lvlTitle" class="lvl-title"></div><div id="lvlSub" class="lvl-sub"></div></div>
+          <div class="chips"><span id="chipDiff" class="chip"></span><span id="chipUnique" class="chip"></span><span id="chipTimer" class="chip mono">00:00</span></div>
+        </div>
+        <div id="boardFrame" class="board-frame">
+          <svg id="board" class="board-svg" role="img" aria-label="กระดานปริศนา">
+            <defs class="g-defs"></defs>
+            <g class="g-cells"></g><g class="g-sheen"></g><g class="g-grid" filter="url(#pencil)"></g><g class="g-verts"></g>
+            <g class="g-walls"></g><g class="g-border"></g><g class="g-clues"></g><g class="g-hover"></g>
+          </svg>
+          <div id="shards" class="shards" aria-hidden="true"></div>
+        </div>
+        <div class="toolrow">
+          <div class="seg" role="group" aria-label="เครื่องมือวาด">
+            <button class="seg-btn active" data-tool="auto">อัตโนมัติ</button>
+            <button class="seg-btn" data-tool="draw">วาด</button>
+            <button class="seg-btn" data-tool="erase">ลบ</button>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button class="tool" id="btnUndo" title="ย้อน (Ctrl+Z)"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg><span>ย้อน</span></button>
+          <button class="tool" id="btnRedo" title="ทำซ้ำ (Ctrl+Y)"><svg viewBox="0 0 24 24"><path d="M15 14l5-5-5-5"/><path d="M20 9H9a5 5 0 0 0 0 10h3"/></svg><span>ทำซ้ำ</span></button>
+          <button class="tool" id="btnRestart" title="เริ่มใหม่"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span>เริ่มใหม่</span></button>
+          <button class="tool" id="btnHint" title="คำใบ้ (H)"><svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z"/></svg><span>คำใบ้</span></button>
+          <button class="tool accent" id="btnCheck" title="ตรวจคำตอบ"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg><span>ตรวจ</span></button>
+        </div>
+      </div>
+      <aside class="side-col">
+        <div class="panel"><h3>กฎของหน้าต่าง</h3><div id="rulesList"></div>
+          <p class="prov-note"><span class="prov">ชั่วคราว</span> = กลไกที่ยังยืนยันจากเกมต้นฉบับไม่ได้</p></div>
+        <div class="panel"><h3>บันทึกช่างกระจก</h3><div id="feedback" class="feedback" aria-live="polite"></div><ul id="errorList" class="error-list"></ul></div>
+        <div class="panel stats"><div><b id="statMoves">0</b><span>การแก้ไข</span></div><div><b id="statHints">0</b><span>คำใบ้</span></div><div><b id="statRegions">0</b><span>พื้นที่ถูกต้อง</span></div></div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<div class="modal" id="modalTutorial" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="tutTitle">
+    <button class="modal-x" data-close aria-label="ปิด">×</button>
+    <div class="tut-step" id="tutStep"></div>
+    <h2 id="tutTitle"></h2>
+    <div class="tut-demo" id="tutDemo">
+      <svg id="tutSvg" class="board-svg">
+        <defs class="g-defs"></defs>
+        <g class="g-cells"></g><g class="g-sheen"></g><g class="g-grid" filter="url(#pencil)"></g><g class="g-verts"></g>
+        <g class="g-walls"></g><g class="g-border"></g><g class="g-clues"></g><g class="g-hover"></g>
+      </svg>
+    </div>
+    <div id="tutText" class="tut-text"></div>
+    <div class="tut-dots" id="tutDots"></div>
+    <div class="modal-actions"><button class="btn" id="tutPrev">ย้อนกลับ</button><button class="btn primary" id="tutNext">ถัดไป</button></div>
+  </div>
+</div>
+<div class="modal" id="modalVictory" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-x" data-close aria-label="ปิด">×</button>
+    <h2 style="text-align:center">หน้าต่างกลับมาส่องประกาย!</h2>
+    <div class="vic-stars" id="vicStars"></div>
+    <p id="vicMsg" style="text-align:center;color:var(--ink2)"></p>
+    <div class="vic-grid"><div><b id="vicTime">00:00</b>เวลา</div><div><b id="vicMoves">0</b>การแก้ไข</div><div><b id="vicHints">0</b>คำใบ้</div></div>
+    <div class="modal-actions">
+      <button class="btn" id="btnVicStay">ดูหน้าต่าง</button>
+      <button class="btn" id="btnVicLevels">แผนที่เกาะ</button>
+      <button class="btn primary" id="btnVicNext">ด่านถัดไป</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modalRandom" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-x" data-close aria-label="ปิด">×</button>
+    <h2>ปริศนาสุ่ม</h2>
+    <p class="about">ทุกปริศนาสร้างจากคำตอบจริง และเครื่องแก้จะตรวจซ้ำก่อนเริ่มเล่นเสมอ</p>
+    <div class="opt-label">ระดับความยาก</div>
+    <div class="seg" id="randDiff">
+      <button class="seg-btn" data-v="easy">ง่าย</button><button class="seg-btn" data-v="medium">ปานกลาง</button><button class="seg-btn" data-v="hard">ยาก</button>
+    </div>
+    <div class="opt-label">ชนิดกฎ</div>
+    <div class="seg wrap" id="randTheme">
+      <button class="seg-btn" data-v="any">สุ่มทุกแบบ</button><button class="seg-btn" data-v="precision">ความแม่นยำ</button>
+      <button class="seg-btn" data-v="shapes">รูปทรง</button><button class="seg-btn" data-v="inequality">อสมการ</button>
+      <button class="seg-btn" data-v="pattern">แบบแผน</button><button class="seg-btn" data-v="mix">ผสม</button>
+    </div>
+    <div class="modal-actions"><button class="btn" data-close>ยกเลิก</button><button class="btn primary" id="btnGenerate">สร้างปริศนา</button></div>
+  </div>
+</div>
+<div class="modal" id="modalSettings" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-x" data-close aria-label="ปิด">×</button>
+    <h2>ตั้งค่า</h2>
+    <label class="setting"><span>ไฮไลต์ข้อผิดพลาดทันที (พื้นที่ผิด เส้นลอย อสมการผิด)</span><input type="checkbox" id="setLive"></label>
+    <label class="setting"><span>ระบายสีกระจกให้พื้นที่ที่ผ่านกฎ</span><input type="checkbox" id="setColor"></label>
+    <label class="setting"><span>เสียงกระจก</span><input type="checkbox" id="setSound"></label>
+    <div class="modal-actions" style="justify-content:flex-start">
+      <button class="btn" id="btnRunTests">ทดสอบระบบ</button>
+      <button class="btn" id="btnResetProgress">ล้างความคืบหน้า</button>
+    </div>
+    <p class="about"><b>หมายเหตุเรื่องกฎ:</b> ไม่พบกติกาทางการของเกมชื่อ “Isle of Glass” โดยตรง เกมนี้จึงใช้กฎ 4 ข้อที่ยืนยันแล้ว (อสมการ, ความแม่นยำ, รูปทรงที่อนุญาต, แบบแผนบัญญัติ) ส่วนที่ต้องตีความเองติดป้าย “ชั่วคราว” ไว้</p>
+  </div>
+</div>
+<div class="modal" id="modalConfirm" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" style="width:min(420px,100%)">
+    <h2>ยืนยัน</h2><p id="confirmText"></p>
+    <div class="modal-actions"><button class="btn" data-close>ยกเลิก</button><button class="btn primary" id="confirmYes">ตกลง</button></div>
+  </div>
+</div>
+<div class="modal" id="modalTests" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-x" data-close aria-label="ปิด">×</button>
+    <h2>ผลการทดสอบระบบ</h2><p id="testSummary" class="about"></p><ul id="testResults" class="test-list"></ul>
+  </div>
+</div>
+
+<div id="loading" class="loading" hidden><div class="spinner"></div><p id="loadingText">กำลังเป่าแก้ว…</p></div>
+<div id="toast" class="toast" hidden></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"/>
+    </filter>
+  </defs>
+</svg>
+</div>
+
+<script>
+'use strict';
+/* ================= Utilities ================= */
+const $=s=>document.querySelector(s);
+const DIRS=[[0,1],[1,0],[0,-1],[-1,0]];
+const PALETTE=['#c8485a','#3f6fb5','#3f9b78','#e0a43a','#8a5fb0','#3aa6a6','#d97a9b','#8fa344'];
+const DIFF_TH={easy:'ง่าย',medium:'ปานกลาง',hard:'ยาก'};
+const THEME_TH={any:'สุ่มทุกแบบ',precision:'ความแม่นยำ',shapes:'รูปทรงที่อนุญาต',inequality:'อสมการ',pattern:'แบบแผนบัญญัติ',mix:'ผสมผสาน'};
+const GEN_VERSION='4';
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function shuffle(arr,rng){for(let i=arr.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));const t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+function hashStr(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function fmt(s){s=Math.max(0,s|0);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+function now(){return (window.performance&&performance.now)?performance.now():Date.now();}
+
+/* ================= Polyominoes ================= */
+const Poly={
+  norm(cells){let mr=Infinity,mc=Infinity;for(const [r,c] of cells){if(r<mr)mr=r;if(c<mc)mc=c;}
+    const o=cells.map(([r,c])=>[r-mr,c-mc]);o.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);return o;},
+  key(cells){return Poly.norm(cells).map(p=>p[0]+','+p[1]).join(';');},
+  transforms(cells){
+    const fs=[([r,c])=>[r,c],([r,c])=>[c,-r],([r,c])=>[-r,-c],([r,c])=>[-c,r],([r,c])=>[r,-c],([r,c])=>[-c,-r],([r,c])=>[-r,c],([r,c])=>[c,r]];
+    const m=new Map();for(const f of fs){const n=Poly.norm(cells.map(f));const k=Poly.key(n);if(!m.has(k))m.set(k,n);}return [...m.values()];},
+  allFixed(n){let cur=new Map([['0,0',[[0,0]]]]);
+    for(let s=1;s<n;s++){const next=new Map();
+      for(const cells of cur.values()){const set=new Set(cells.map(p=>p[0]+','+p[1]));
+        for(const [r,c] of cells)for(const [dr,dc] of DIRS){const nr=r+dr,nc=c+dc;if(set.has(nr+','+nc))continue;
+          const nn=Poly.norm([...cells,[nr,nc]]);const k=Poly.key(nn);if(!next.has(k))next.set(k,nn);}}
+      cur=next;}
+    return [...cur.values()];}
+};
+const SHAPES={
+  I1:{name:'ชิ้นเดี่ยว',cells:[[0,0]]},I2:{name:'โดมิโน',cells:[[0,0],[0,1]]},
+  I3:{name:'แท่งสาม',cells:[[0,0],[0,1],[0,2]]},L3:{name:'มุมสาม',cells:[[0,0],[1,0],[1,1]]},
+  I4:{name:'แท่งสี่',cells:[[0,0],[0,1],[0,2],[0,3]]},O4:{name:'จัตุรัส',cells:[[0,0],[0,1],[1,0],[1,1]]},
+  T4:{name:'ตัวที',cells:[[0,0],[0,1],[0,2],[1,1]]},L4:{name:'ตัวแอล',cells:[[0,0],[1,0],[2,0],[2,1]]},
+  S4:{name:'ตัวเอส',cells:[[0,1],[0,2],[1,0],[1,1]]},P5:{name:'ตัวพี',cells:[[0,0],[0,1],[1,0],[1,1],[2,0]]},
+  U5:{name:'ตัวยู',cells:[[0,0],[0,2],[1,0],[1,1],[1,2]]},V5:{name:'ตัววี',cells:[[0,0],[1,0],[2,0],[2,1],[2,2]]}
+};
+const PATTERNS={
+  I1:[[0,0]],I2h:[[0,0],[0,1]],I2v:[[0,0],[1,0]],I3h:[[0,0],[0,1],[0,2]],I3v:[[0,0],[1,0],[2,0]],
+  L3a:[[0,0],[1,0],[1,1]],L3b:[[0,0],[0,1],[1,0]],L3c:[[0,0],[0,1],[1,1]],L3d:[[0,1],[1,0],[1,1]],
+  O4:[[0,0],[0,1],[1,0],[1,1]],T4d:[[0,0],[0,1],[0,2],[1,1]],T4u:[[0,1],[1,0],[1,1],[1,2]],
+  S4h:[[0,1],[0,2],[1,0],[1,1]],Z4h:[[0,0],[0,1],[1,1],[1,2]],L4a:[[0,0],[1,0],[2,0],[2,1]],J4a:[[0,1],[1,1],[2,0],[2,1]]
+};
+function resolveRules(r){
+  const out={precision:r.precision||0,shapes:null,patterns:null,inequality:!!r.inequality};
+  if(r.shapes)out.shapes=r.shapes.map(s=>{if(typeof s!=='string')return Poly.norm(s);if(!SHAPES[s])throw new Error('ไม่รู้จักรูปทรง '+s);return Poly.norm(SHAPES[s].cells);});
+  if(r.patterns)out.patterns=r.patterns.map(s=>{if(typeof s!=='string')return Poly.norm(s);if(!PATTERNS[s])throw new Error('ไม่รู้จักแบบแผน '+s);return Poly.norm(PATTERNS[s]);});
+  return out;
+}
+
+/* ================= Geometry ================= */
+class Geo{
+  constructor(w,h,mask){
+    this.w=w;this.h=h;this.n=w*h;this.mask=mask;
+    this.nH=(h+1)*w;this.nE=this.nH+h*(w+1);
+    this.internal=[];this.border=[];this.isInt=new Uint8Array(this.nE);
+    for(let e=0;e<this.nE;e++){const [a,b]=this.edgeCells(e);const ia=this.inMask(a),ib=this.inMask(b);
+      if(ia&&ib){this.internal.push(e);this.isInt[e]=1;}else if(ia!==ib)this.border.push(e);}
+    this.cells=[];this.nbr=[];
+    for(let c=0;c<this.n;c++){const l=[];
+      if(mask[c]){this.cells.push(c);const r=(c/w)|0,x=c%w;
+        for(const [dr,dc] of DIRS){const nr=r+dr,nc=x+dc;if(nr<0||nr>=h||nc<0||nc>=w)continue;const d=nr*w+nc;if(!mask[d])continue;l.push([d,this.between(c,d)]);}}
+      this.nbr.push(l);}
+  }
+  hId(y,x){return y*this.w+x;}
+  vId(y,x){return this.nH+y*(this.w+1)+x;}
+  inMask(c){return c>=0&&this.mask[c]===1;}
+  edgeCells(e){const w=this.w,h=this.h;
+    if(e<this.nH){const y=Math.floor(e/w),x=e%w;return [y>0?(y-1)*w+x:-1,y<h?y*w+x:-1];}
+    const i=e-this.nH,y=Math.floor(i/(w+1)),x=i%(w+1);return [x>0?y*w+x-1:-1,x<w?y*w+x:-1];}
+  edgeVerts(e){if(e<this.nH){const y=Math.floor(e/this.w),x=e%this.w;return [[y,x],[y,x+1]];}
+    const i=e-this.nH,y=Math.floor(i/(this.w+1)),x=i%(this.w+1);return [[y,x],[y+1,x]];}
+  segId(v1,v2){const [y1,x1]=v1,[y2,x2]=v2;
+    if(y1===y2&&Math.abs(x1-x2)===1){const x=Math.min(x1,x2);if(y1<0||y1>this.h||x<0||x>=this.w)return -1;return this.hId(y1,x);}
+    if(x1===x2&&Math.abs(y1-y2)===1){const y=Math.min(y1,y2);if(x1<0||x1>this.w||y<0||y>=this.h)return -1;return this.vId(y,x1);}
+    return -1;}
+  between(a,b){const w=this.w,ra=(a/w)|0,ca=a%w,rb=(b/w)|0,cb=b%w;
+    if(ra===rb)return this.vId(ra,Math.max(ca,cb));return this.hId(Math.max(ra,rb),ca);}
+}
+function pathSegments(geo,from,to){const out=[];let cur=[from[0],from[1]];let guard=0;
+  while(cur[1]!==to[1]&&guard++<100){const nx=[cur[0],cur[1]+Math.sign(to[1]-cur[1])];const e=geo.segId(cur,nx);if(e>=0)out.push(e);cur=nx;}
+  while(cur[0]!==to[0]&&guard++<200){const nx=[cur[0]+Math.sign(to[0]-cur[0]),cur[1]];const e=geo.segId(cur,nx);if(e>=0)out.push(e);cur=nx;}
+  return out;}
+function nearestEdgeAt(geo,gx,gy){
+  let best=null;const hy=Math.round(gy),hx=Math.floor(gx),dh=Math.abs(gy-hy);
+  if(hx>=0&&hx<geo.w&&hy>=0&&hy<=geo.h){const e=geo.hId(hy,hx);if(geo.isInt[e])best={e,d:dh};}
+  const vx=Math.round(gx),vy=Math.floor(gy),dv=Math.abs(gx-vx);
+  if(vy>=0&&vy<geo.h&&vx>=0&&vx<=geo.w){const e=geo.vId(vy,vx);if(geo.isInt[e]&&(!best||dv<best.d))best={e,d:dv};}
+  return best;}
+
+/* ================= Puzzle preparation ================= */
+const pieceCache=new Map();
+function toOffsets(cells){const n=Poly.norm(cells);const [ar,ac]=n[0];const offs=n.map(([r,c])=>[r-ar,c-ac]);const pairs=[];
+  for(let i=0;i<offs.length;i++)for(let j=i+1;j<offs.length;j++)if(Math.abs(offs[i][0]-offs[j][0])+Math.abs(offs[i][1]-offs[j][1])===1)pairs.push([i,j]);
+  return {cells:offs,size:offs.length,pairs};}
+function computePieces(rules){
+  const key=JSON.stringify([rules.precision||0,rules.shapes||null,rules.patterns||null]);
+  if(pieceCache.has(key))return pieceCache.get(key);
+  let cand=null,shapeKeys=null,patternKeys=null;
+  if(rules.shapes){cand=new Map();for(const s of rules.shapes)for(const o of Poly.transforms(s))cand.set(Poly.key(o),o);shapeKeys=new Set(cand.keys());}
+  if(rules.patterns){const pm=new Map(rules.patterns.map(p=>{const n=Poly.norm(p);return [Poly.key(n),n];}));patternKeys=new Set(pm.keys());
+    cand=cand?new Map([...pm].filter(([k])=>cand.has(k))):pm;}
+  if(!cand){cand=new Map();if(rules.precision)for(const p of Poly.allFixed(rules.precision))cand.set(Poly.key(p),p);}
+  if(rules.precision)cand=new Map([...cand].filter(([,v])=>v.length===rules.precision));
+  const res={offsets:[...cand.values()].map(toOffsets),shapeKeys,patternKeys};pieceCache.set(key,res);return res;}
+function prepare(pz){
+  const mask=Uint8Array.from(String(pz.mask),ch=>ch==='1'?1:0);
+  if(mask.length!==pz.w*pz.h)throw new Error('ข้อมูลกระดานเสียหาย');
+  const geo=new Geo(pz.w,pz.h,mask);const rules=pz.rules;const cp=computePieces(rules);
+  const givens=new Uint8Array(geo.nE);for(const e of (pz.givens||[]))if(geo.isInt[e])givens[e]=1;
+  const ineq=(pz.ineq||[]).map(q=>({small:q.small,big:q.big,e:(q.e!=null?q.e:geo.between(q.small,q.big))}));
+  const ineqByCell=new Array(geo.n).fill(null);
+  for(const q of ineq)for(const c of [q.small,q.big])(ineqByCell[c]||(ineqByCell[c]=[])).push(q);
+  let maxSize=Infinity;
+  if(rules.precision)maxSize=rules.precision;
+  else{const l=[...(rules.shapes||[]),...(rules.patterns||[])];if(l.length)maxSize=Math.max(...l.map(s=>s.length));}
+  const sizes=[...new Set(cp.offsets.map(o=>o.size))];
+  const reach=new Uint8Array(geo.n+1);reach[0]=1;
+  for(let s=1;s<=geo.n;s++)for(const z of sizes)if(z<=s&&reach[s-z]){reach[s]=1;break;}
+  let solution=null;if(pz.solution){solution=new Uint8Array(geo.nE);for(const e of pz.solution)solution[e]=1;}
+  return {pz,geo,rules,givens,ineq,ineqByCell,pieceOffsets:cp.offsets,shapeKeys:cp.shapeKeys,patternKeys:cp.patternKeys,maxSize,reach,solution};
+}
+
+/* ================= Regions & validation ================= */
+function computeRegions(geo,walls){
+  const reg=new Int16Array(geo.n).fill(-1);const regions=[];const stack=[];
+  for(const c of geo.cells){if(reg[c]>=0)continue;const id=regions.length;const cells=[];reg[c]=id;stack.push(c);
+    while(stack.length){const x=stack.pop();cells.push(x);for(const [d,e] of geo.nbr[x]){if(walls[e]||reg[d]>=0)continue;reg[d]=id;stack.push(d);}}
+    cells.sort((a,b)=>a-b);regions.push({id,cells,size:cells.length});}
+  return {reg,regions};}
+function regionKey(geo,cells){return Poly.key(cells.map(c=>[(c/geo.w)|0,c%geo.w]));}
+function evaluate(P,walls){
+  const {geo,rules}=P;const {reg,regions}=computeRegions(geo,walls);
+  const dangling=[];for(const e of geo.internal){if(!walls[e])continue;const [a,b]=geo.edgeCells(e);if(reg[a]===reg[b])dangling.push(e);}
+  for(const R of regions){R.issues=[];const k=regionKey(geo,R.cells);R.key=k;
+    if(rules.precision&&R.size!==rules.precision)R.issues.push('precision');
+    if(P.shapeKeys&&!P.shapeKeys.has(k))R.issues.push('shape');
+    if(P.patternKeys&&!P.patternKeys.has(k))R.issues.push('pattern');
+    R.status=R.issues.length===0?'ok':(R.size>P.maxSize?'open':'bad');}
+  const ineqRes=P.ineq.map(q=>{const rs=reg[q.small],rb=reg[q.big];const same=rs===rb;const ss=regions[rs].size,sb=regions[rb].size;const ok=!same&&ss<sb;
+    const status=ok?'ok':((regions[rs].status==='open'||regions[rb].status==='open')?'pending':'bad');return {q,ok,same,ss,sb,status};});
+  const solved=dangling.length===0&&regions.every(R=>R.status==='ok')&&ineqRes.every(x=>x.ok);
+  return {reg,regions,dangling,ineqRes,solved};}
+function cellLabel(geo,c){return `แถว ${((c/geo.w)|0)+1} หลัก ${c%geo.w+1}`;}
+function explain(P,ev){
+  const out=[],geo=P.geo;
+  if(ev.dangling.length)out.push({text:`มีเส้นตะกั่ว ${ev.dangling.length} เส้นที่ไม่ได้แบ่งพื้นที่ (สองฝั่งของเส้นยังเชื่อมถึงกัน) — ต่อเส้นให้ปิดล้อมพื้นที่ หรือลบเส้นนั้นออก`,cells:[],edges:ev.dangling});
+  for(const R of ev.regions){if(R.status==='ok')continue;
+    const where=`พื้นที่ที่เริ่มจาก${cellLabel(geo,R.cells[0])} (${R.size} ช่อง)`;
+    if(R.status==='open'){out.push({text:`${where} ใหญ่เกินกว่าที่กฎอนุญาต (ไม่เกิน ${P.maxSize} ช่อง) — ต้องแบ่งเพิ่ม`,cells:R.cells,soft:true});continue;}
+    for(const k of R.issues){
+      if(k==='precision')out.push({text:`${where}: กฎความแม่นยำกำหนดให้ทุกพื้นที่มี ${P.rules.precision} ช่องพอดี`,cells:R.cells});
+      if(k==='shape')out.push({text:`${where}: รูปทรงไม่ตรงกับรูปทรงที่อนุญาตใด ๆ (หมุนหรือพลิกได้)`,cells:R.cells});
+      if(k==='pattern')out.push({text:`${where}: ไม่ตรงกับแบบแผนที่แสดงไว้ (ต้องวางทิศทางเดียวกับแบบ ห้ามหมุนหรือพลิก)`,cells:R.cells});}}
+  ev.ineqRes.forEach(x=>{if(x.ok)return;const q=x.q;
+    const cells=[...ev.regions[ev.reg[q.small]].cells,...(x.same?[]:ev.regions[ev.reg[q.big]].cells)];
+    const soft=x.status!=='bad';
+    if(x.same)out.push({text:`อสมการที่${cellLabel(geo,q.small)}: ทั้งสองฝั่งยังเป็นพื้นที่เดียวกัน — สัญลักษณ์ต้องคั่นสองพื้นที่ที่ต่างกัน`,cells,edges:[q.e],soft});
+    else out.push({text:`อสมการที่${cellLabel(geo,q.small)}: ปลายแหลมชี้ไปยังพื้นที่ ${x.ss} ช่อง แต่อีกฝั่งมี ${x.sb} ช่อง — ฝั่งปลายแหลมต้องเล็กกว่า`,cells,edges:[q.e],soft});});
+  return out;}
+
+/* ================= Solver ================= */
+function solveCount(P,opts={}){
+  const geo=P.geo,n=geo.n,w=geo.w,h=geo.h;const pieces=P.pieceOffsets;
+  if(!pieces||!pieces.length)return {count:0,sols:[],aborted:false,nodes:0};
+  const limit=opts.limit||2,nodeLimit=opts.nodeLimit||100000,rng=opts.rng||null;
+  const owner=new Int16Array(n);for(let c=0;c<n;c++)owner[c]=geo.mask[c]?-1:-2;
+  const sizes=new Int16Array(n+1);let nreg=0,nodes=0,aborted=false;const sols=[];
+  const givens=P.givens,nbr=geo.nbr,reach=P.reach,ineqByCell=P.ineqByCell;
+  const seen=new Int32Array(n);let stamp=0;const stk=new Int32Array(n);
+  function pocketsOK(){stamp++;
+    for(let c=0;c<n;c++){if(owner[c]!==-1||seen[c]===stamp)continue;let sz=0,sp=0;stk[sp++]=c;seen[c]=stamp;
+      while(sp){const x=stk[--sp];sz++;const L=nbr[x];for(let k=0;k<L.length;k++){const d=L[k][0];if(owner[d]!==-1||seen[d]===stamp||givens[L[k][1]])continue;seen[d]=stamp;stk[sp++]=d;}}
+      if(!reach[sz])return false;}
+    return true;}
+  function rec(start){
+    if(sols.length>=limit||aborted)return;
+    if(++nodes>nodeLimit){aborted=true;return;}
+    let c=start;while(c<n&&owner[c]!==-1)c++;
+    if(c>=n){sols.push(Int16Array.from(owner));return;}
+    const r0=(c/w)|0,c0=c%w;const list=rng?shuffle(pieces.slice(),rng):pieces;
+    for(let pi=0;pi<list.length;pi++){const p=list[pi];const cells=new Array(p.size);let ok=true;
+      for(let i=0;i<p.size;i++){const r=r0+p.cells[i][0],cc=c0+p.cells[i][1];if(r<0||r>=h||cc<0||cc>=w){ok=false;break;}const id=r*w+cc;if(owner[id]!==-1){ok=false;break;}cells[i]=id;}
+      if(!ok)continue;
+      for(let k=0;k<p.pairs.length;k++){const [i,j]=p.pairs[k];if(givens[geo.between(cells[i],cells[j])]){ok=false;break;}}
+      if(!ok)continue;
+      const rid=nreg++;sizes[rid]=p.size;for(const id of cells)owner[id]=rid;
+      outer:for(const id of cells){const cl=ineqByCell[id];if(!cl)continue;
+        for(const q of cl){const os=owner[q.small],ob=owner[q.big];if(os<0||ob<0)continue;if(os===ob||sizes[os]>=sizes[ob]){ok=false;break outer;}}}
+      if(ok&&pocketsOK())rec(c+1);
+      for(const id of cells)owner[id]=-1;nreg--;
+      if(sols.length>=limit||aborted)return;}
+  }
+  if(pocketsOK())rec(0);
+  return {count:sols.length,sols,aborted,nodes};}
+function ownerToWalls(geo,owner){const w=new Uint8Array(geo.nE);for(const e of geo.internal){const [a,b]=geo.edgeCells(e);if(owner[a]!==owner[b])w[e]=1;}return w;}
+function wallsEqual(a,b){if(a.length!==b.length)return false;for(let i=0;i<a.length;i++)if(a[i]!==b[i])return false;return true;}
+function sizesOf(owner){const m=new Map();for(const o of owner)if(o>=0)m.set(o,(m.get(o)||0)+1);return m;}
+
+/* ================= Generator ================= */
+function connectedMask(m,w,h){let start=-1,total=0;for(let i=0;i<m.length;i++)if(m[i]){total++;if(start<0)start=i;}
+  if(start<0)return false;const seen=new Uint8Array(m.length);const st=[start];seen[start]=1;let cnt=0;
+  while(st.length){const c=st.pop();cnt++;const r=(c/w)|0,x=c%w;
+    for(const [dr,dc] of DIRS){const nr=r+dr,nc=x+dc;if(nr<0||nr>=h||nc<0||nc>=w)continue;const d=nr*w+nc;if(m[d]&&!seen[d]){seen[d]=1;st.push(d);}}}
+  return cnt===total;}
+function makeMask(w,h,holes,shape,reach,rng){
+  const m=new Uint8Array(w*h).fill(1);let count=w*h;
+  const rem=c=>{if(c<0||c>=m.length||!m[c])return false;m[c]=0;if(!connectedMask(m,w,h)){m[c]=1;return false;}count--;return true;};
+  if(shape==='arch'&&w>=4&&h>=4){rem(0);rem(w-1);if(w>=6){rem(1);rem(w-2);rem(w);rem(2*w-1);}}
+  const isB=c=>{const r=(c/w)|0,x=c%w;if(r===0||r===h-1||x===0||x===w-1)return true;
+    for(const [dr,dc] of DIRS){if(!m[(r+dr)*w+x+dc])return true;}return false;};
+  let removed=0,guard=0;
+  while((removed<holes||!reach[count])&&guard++<300){
+    const bnd=[];for(let c=0;c<m.length;c++)if(m[c]&&isB(c))bnd.push(c);
+    if(!bnd.length)return null;const c=bnd[Math.floor(rng()*bnd.length)];const r=(c/w)|0,x=c%w;const mir=r*w+(w-1-x);
+    if(rem(c)){removed++;if(mir!==c&&removed<holes&&rng()<0.7&&rem(mir))removed++;}
+    if(count<w*h*0.6)return null;}
+  return reach[count]?m:null;}
+function candidateClues(geo,owner,rules){
+  const walls=ownerToWalls(geo,owner);const sz=sizesOf(owner);const list=[];
+  for(const e of geo.internal){if(!walls[e])continue;list.push({t:'w',e});
+    if(rules.inequality){const [a,b]=geo.edgeCells(e);const sa=sz.get(owner[a]),sb=sz.get(owner[b]);
+      if(sa!==sb)list.push({t:'i',e,small:sa<sb?a:b,big:sa<sb?b:a});}}
+  return list;}
+const clueKey=c=>c.t+c.e;
+function violates(geo,owner,c){
+  if(c.t==='w'){const [a,b]=geo.edgeCells(c.e);return owner[a]===owner[b];}
+  const sz=sizesOf(owner);const os=owner[c.small],ob=owner[c.big];return os===ob||sz.get(os)>=sz.get(ob);}
+function tryGenerate(spec,rules,rng,t0,maxMs){
+  const {w,h}=spec;
+  const P0=prepare({w,h,mask:'1'.repeat(w*h),rules,givens:[],ineq:[]});
+  const mask=makeMask(w,h,spec.holes||0,spec.shape||'rect',P0.reach,rng);if(!mask)return null;
+  const maskStr=Array.from(mask).join('');
+  const base={w,h,mask:maskStr,rules,givens:[],ineq:[]};const P=prepare(base);const geo=P.geo;
+  const tile=solveCount(P,{limit:1,nodeLimit:20000,rng});if(!tile.count)return null;
+  let target=tile.sols[0];
+  const tsz=sizesOf(target);
+  if(rules.inequality&&new Set(tsz.values()).size<2)return null;
+  if(rules.shapes||rules.patterns){
+    const list=rules.patterns||rules.shapes;const fixed=!!rules.patterns;
+    const keyLists=list.map(s=>fixed?[Poly.key(s)]:Poly.transforms(s).map(Poly.key));
+    const groups=new Map();geo.cells.forEach(c=>{const o=target[c];if(!groups.has(o))groups.set(o,[]);groups.get(o).push(c);});
+    const used=new Set();for(const cells of groups.values()){const k=regionKey(geo,cells);keyLists.forEach((kl,i)=>{if(kl.includes(k))used.add(i);});}
+    if(used.size<Math.min(2,list.length))return null;}
+  const build=(clues,tgt)=>{const o={w,h,mask:maskStr,rules,
+      givens:clues.filter(c=>c.t==='w').map(c=>c.e).sort((a,b)=>a-b),
+      ineq:clues.filter(c=>c.t==='i').map(c=>({e:c.e,small:c.small,big:c.big}))};
+    if(tgt){const tw=ownerToWalls(geo,tgt);o.solution=geo.internal.filter(e=>tw[e]);}return o;};
+  let cands=candidateClues(geo,target,rules);const used=new Map();
+  if(rules.inequality){const iq=shuffle(cands.filter(c=>c.t==='i'),rng);const k=Math.max(1,Math.round(iq.length*0.3));for(const c of iq.slice(0,k))used.set(clueKey(c),c);}
+  const NL=spec.nodeLimit||40000;let unique=false;
+  for(let it=0;it<160;it++){
+    if(now()-t0>maxMs)return null;
+    const r=solveCount(prepare(build([...used.values()])),{limit:2,nodeLimit:NL});
+    if(r.count===1&&!r.aborted){unique=true;break;}
+    if(r.count===0&&!r.aborted)return null;
+    const tw=ownerToWalls(geo,target);const alt=r.sols.find(s=>!wallsEqual(ownerToWalls(geo,s),tw));
+    let pool;
+    if(alt){pool=cands.filter(c=>!used.has(clueKey(c))&&violates(geo,alt,c));
+      if(!pool.length){target=alt;cands=candidateClues(geo,target,rules);continue;}}
+    else pool=cands.filter(c=>!used.has(clueKey(c)));
+    if(!pool.length)return null;
+    const iq=pool.filter(c=>c.t==='i');let pick;
+    if(iq.length&&rng()<0.65)pick=iq[Math.floor(rng()*iq.length)];
+    else{const wq=pool.filter(c=>c.t==='w');const src=wq.length?wq:pool;pick=src[Math.floor(rng()*src.length)];}
+    used.set(clueKey(pick),pick);
+    if(!alt){const extra=pool.filter(c=>c!==pick);if(extra.length)used.set(clueKey(extra[0]),extra[0]);}
+  }
+  if(!unique)return null;
+  const frac={easy:0.35,medium:0.75,hard:1}[spec.difficulty||'medium']||0.75;
+  let clues=shuffle([...used.values()],rng);const minIneq=rules.inequality?(spec.difficulty==='hard'?1:2):0;
+  for(const c of [...clues]){
+    if(now()-t0>maxMs*0.7)break;if(rng()>frac)continue;
+    if(c.t==='i'&&clues.filter(x=>x.t==='i').length<=minIneq)continue;
+    const trial=clues.filter(x=>x!==c);
+    const r=solveCount(prepare(build(trial)),{limit:2,nodeLimit:NL});
+    if(r.count===1&&!r.aborted)clues=trial;}
+  const json=build(clues,target);const Pf=prepare(json);
+  const fin=solveCount(Pf,{limit:2,nodeLimit:250000});
+  if(fin.count===0&&!fin.aborted)return null;
+  json.unique=fin.count===1&&!fin.aborted;
+  if(!evaluate(Pf,Pf.solution).solved)return null;
+  return json;}
+function generate(spec,seed,maxMs=15000){
+  const rng=mulberry32(seed>>>0);const t0=now();const rules=resolveRules(spec.rules);
+  const cp=computePieces(rules);if(!cp.offsets.length)throw new Error('กฎของปริศนาขัดแย้งกันจนไม่มีรูปทรงใดใช้ได้');
+  for(let a=0;a<80;a++){if(now()-t0>maxMs)break;
+    const pz=tryGenerate(spec,rules,rng,t0,maxMs);
+    if(pz){pz.seed=seed;pz.difficulty=spec.difficulty||'medium';return pz;}}
+  throw new Error('สร้างปริศนาไม่สำเร็จภายในเวลาที่กำหนด');}
+function randomSpec(diff,theme,rng){
+  const pick=a=>a[Math.floor(rng()*a.length)];
+  if(theme==='any')theme=pick(['precision','shapes','inequality','pattern','mix']);
+  let [w,h]=pick({easy:[[4,4],[5,4],[5,5]],medium:[[5,5],[6,5],[6,6]],hard:[[6,6],[7,6],[6,7]]}[diff]);
+  if(rng()<0.5)[w,h]=[h,w];
+  const holes={easy:0,medium:1,hard:2}[diff];const shape=(w>=5&&h>=5&&rng()<0.35)?'arch':'rect';
+  const sub=(arr,k)=>shuffle(arr.slice(),rng).slice(0,k);let rules;
+  if(theme==='precision')rules={precision:pick({easy:[2,3,4],medium:[3,4,5],hard:[4,5]}[diff])};
+  else if(theme==='shapes')rules={shapes:sub({easy:['I2','I3','L3','O4'],medium:['L3','I3','T4','L4','S4','O4','I4'],hard:['T4','L4','S4','P5','U5','V5','L3']}[diff],diff==='easy'?2:3)};
+  else if(theme==='inequality')rules={shapes:pick({easy:[['I1','I2','I3'],['I2','L3','O4'],['I1','L3']],medium:[['I2','L3','T4'],['I2','I3','O4','L4'],['L3','L4','P5']],hard:[['I2','L3','T4','P5'],['I1','L3','S4','U5'],['L3','O4','P5','V5']]}[diff]),inequality:true};
+  else if(theme==='pattern')rules={patterns:pick({easy:[['I2h','I3v'],['I2v','I3h'],['I2h','L3a','L3c']],medium:[['O4','I2v','I3h'],['T4d','T4u','I2v'],['L3a','L3d','I2h','I3v']],hard:[['S4h','Z4h','I2h','O4'],['T4d','L4a','J4a','I2h'],['L3b','L3d','T4u','I3h','I2v']]}[diff])};
+  else rules=pick([{precision:4,shapes:sub(['L4','T4','S4','O4','I4'],3)},{precision:3,patterns:['I3h','I3v','L3a','L3c']},{patterns:['I2h','I2v','L3a','L3d','T4u'],inequality:true}]);
+  return {w,h,rules,difficulty:diff,holes,shape,theme};}
+
+/* ================= Levels ================= */
+const CHAPTERS=[
+ {name:'ลานกระจกใส',theme:'ความแม่นยำ',color:'#3f6fb5',desc:'เรียนรู้การวาดเส้นตะกั่ว ทุกพื้นที่ต้องมีจำนวนช่องเท่ากันพอดี',levels:[
+  {w:4,h:4,rules:{precision:2},difficulty:'easy'},
+  {w:4,h:4,rules:{precision:4},difficulty:'easy'},
+  {w:5,h:5,rules:{precision:3},difficulty:'easy',holes:1},
+  {w:5,h:5,rules:{precision:4},difficulty:'medium',holes:1,shape:'arch'},
+  {w:6,h:5,rules:{precision:5},difficulty:'medium'},
+  {w:6,h:6,rules:{precision:4},difficulty:'hard',shape:'arch'}]},
+ {name:'สวนรูปทรง',theme:'รูปทรงที่อนุญาต',color:'#3f9b78',desc:'กระจกแต่ละชิ้นต้องเป็นรูปทรงที่ช่างกำหนด หมุนหรือพลิกได้',levels:[
+  {w:4,h:4,rules:{shapes:['I3','L3']},difficulty:'easy',holes:1},
+  {w:5,h:4,rules:{shapes:['I2','O4']},difficulty:'easy'},
+  {w:5,h:5,rules:{shapes:['L4','T4']},difficulty:'medium',holes:1},
+  {w:6,h:5,rules:{shapes:['S4','I4','O4']},difficulty:'medium',holes:2},
+  {w:6,h:6,rules:{shapes:['P5','L4']},difficulty:'hard',shape:'arch'},
+  {w:6,h:6,rules:{shapes:['T4','L3','I2']},difficulty:'hard'}]},
+ {name:'หอคอยอสมการ',theme:'อสมการ',color:'#c8485a',desc:'สัญลักษณ์ปลายแหลมบอกว่าฝั่งไหนเล็กกว่า ใช้มันไขขนาดของแต่ละพื้นที่',levels:[
+  {w:4,h:4,rules:{shapes:['I1','I2','I3'],inequality:true},difficulty:'easy'},
+  {w:5,h:4,rules:{shapes:['I2','L3','O4'],inequality:true},difficulty:'easy'},
+  {w:5,h:5,rules:{shapes:['I2','I3','T4'],inequality:true},difficulty:'medium'},
+  {w:6,h:5,rules:{shapes:['L3','L4','P5'],inequality:true},difficulty:'medium'},
+  {w:6,h:6,rules:{shapes:['I1','L3','O4','P5'],inequality:true},difficulty:'hard',shape:'arch'}]},
+ {name:'วิหารแบบแผน',theme:'แบบแผนบัญญัติ',color:'#8a5fb0',desc:'ทุกชิ้นต้องตรงกับแบบแผนที่จารึกไว้ — ทิศทางต้องตรงกันด้วย',levels:[
+  {w:4,h:4,rules:{patterns:['I2h','I3v']},difficulty:'easy'},
+  {w:6,h:4,rules:{patterns:['L3b','L3d']},difficulty:'easy'},
+  {w:5,h:6,rules:{patterns:['O4','I2v','I3h']},difficulty:'medium'},
+  {w:6,h:4,rules:{patterns:['T4d','T4u','I2v']},difficulty:'medium'},
+  {w:6,h:6,rules:{patterns:['S4h','Z4h','I2h','O4']},difficulty:'hard'}]},
+ {name:'มหาวิหารแสง',theme:'ผสมผสาน',color:'#e0a43a',desc:'กฎหลายข้อทำงานพร้อมกัน — บททดสอบของช่างกระจกระดับครู',levels:[
+  {w:5,h:5,rules:{precision:4,shapes:['L4','T4','S4']},difficulty:'medium',holes:1},
+  {w:6,h:5,rules:{precision:3,patterns:['I3h','L3a','L3c']},difficulty:'medium'},
+  {w:6,h:6,rules:{patterns:['I2v','L3a','T4u','O4'],inequality:true},difficulty:'hard'},
+  {w:7,h:6,rules:{precision:5,shapes:['P5','U5','V5']},difficulty:'hard',holes:2}]}
+];
+const FLAT=[];CHAPTERS.forEach((ch,ci)=>ch.levels.forEach((_,li)=>FLAT.push([ci,li])));
+const levelId=(ci,li)=>`c${ci+1}-${li+1}`;
+
+/* ================= Storage & sound ================= */
+const Store={key:'isle-of-glass-v1',data:null,
+  defaults(){return {completed:{},progress:{},settings:{live:true,sound:true,color:true},tutorialSeen:false,random:null,last:null,randomPrefs:{diff:'easy',theme:'any'},randomSolved:0};},
+  load(){let d={};try{const s=localStorage.getItem(this.key);if(s)d=JSON.parse(s)||{};}catch(e){d={};}
+    const def=this.defaults();this.data=Object.assign(def,d);this.data.settings=Object.assign(this.defaults().settings,d.settings||{});
+    this.data.randomPrefs=Object.assign({diff:'easy',theme:'any'},d.randomPrefs||{});
+    if(!this.data.completed||typeof this.data.completed!=='object')this.data.completed={};
+    if(!this.data.progress||typeof this.data.progress!=='object')this.data.progress={};},
+  save(){try{localStorage.setItem(this.key,JSON.stringify(this.data));}catch(e){toast('บันทึกความคืบหน้าไม่ได้ (พื้นที่เก็บข้อมูลของเบราว์เซอร์ไม่พร้อม)');}},
+  cacheGet(k){try{const s=localStorage.getItem('iog-cache-'+GEN_VERSION+'-'+k);return s?JSON.parse(s):null;}catch(e){return null;}},
+  cacheSet(k,v){try{localStorage.setItem('iog-cache-'+GEN_VERSION+'-'+k,JSON.stringify(v));}catch(e){}}
+};
+const Sound={ctx:null,play(type){if(!Store.data||!Store.data.settings.sound)return;
+  try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;this.ctx=this.ctx||new AC();const ctx=this.ctx;const t=ctx.currentTime;
+    const f={draw:[1046],erase:[622],win:[784,988,1175,1568],hint:[660,990],bad:[233,196]}[type]||[880];
+    f.forEach((fr,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=fr;const st=t+i*0.09;
+      g.gain.setValueAtTime(0.0001,st);g.gain.exponentialRampToValueAtTime(type==='win'?0.09:0.05,st+0.01);g.gain.exponentialRampToValueAtTime(0.0001,st+0.4);
+      o.connect(g).connect(ctx.destination);o.start(st);o.stop(st+0.45);});}catch(e){}}};
+
+/* ================= Board view ================= */
+const SVGNS='http://www.w3.org/2000/svg';
+function mk(tag,attrs,parent){const e=document.createElementNS(SVGNS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+class BoardView{
+  constructor(svg,uid){this.svg=svg;this.uid=uid;this.S=60;this.PAD=24;this.g={};
+    for(const k of ['defs','cells','sheen','grid','verts','walls','border','clues','hover'])this.g[k]=svg.querySelector('.g-'+k);}
+  X(x){return this.PAD+x*this.S;}Y(y){return this.PAD+y*this.S;}
+  build(P){
+    this.P=P;const geo=P.geo,S=this.S,PAD=this.PAD;for(const k in this.g)this.g[k].replaceChildren();
+    const VW=geo.w*S+PAD*2,VH=geo.h*S+PAD*2;this.svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`);
+    const cid='clip-'+this.uid,sid='sheen-'+this.uid,wid='sweep-'+this.uid;
+    const clip=mk('clipPath',{id:cid},this.g.defs);
+    for(const c of geo.cells){const r=(c/geo.w)|0,x=c%geo.w;mk('rect',{x:this.X(x),y:this.Y(r),width:S,height:S},clip);}
+    const lg=mk('linearGradient',{id:sid,x1:0,y1:0,x2:1,y2:1},this.g.defs);
+    [[0,0],[0.3,0.24],[0.45,0],[0.7,0.14],[1,0]].forEach(([o,a])=>mk('stop',{offset:o,'stop-color':'#fff','stop-opacity':a},lg));
+    const sg=mk('linearGradient',{id:wid,x1:0,y1:0,x2:1,y2:0},this.g.defs);
+    [[0,0],[0.42,0],[0.5,0.8],[0.58,0],[1,0]].forEach(([o,a])=>mk('stop',{offset:o,'stop-color':'#fffbe6','stop-opacity':a},sg));
+    mk('rect',{x:0,y:0,width:VW,height:VH,fill:'transparent'},this.g.cells);
+    this.cellEls=new Array(geo.n);
+    for(const c of geo.cells){const r=(c/geo.w)|0,x=c%geo.w;this.cellEls[c]=mk('rect',{x:this.X(x)-0.25,y:this.Y(r)-0.25,width:S+0.5,height:S+0.5,class:'cell'},this.g.cells);}
+    mk('rect',{x:PAD,y:PAD,width:geo.w*S,height:geo.h*S,fill:`url(#${sid})`,'clip-path':`url(#${cid})`,class:'sheen'},this.g.sheen);
+    const sweepG=mk('g',{'clip-path':`url(#${cid})`},this.g.sheen);
+    mk('rect',{x:PAD,y:PAD,width:geo.w*S,height:geo.h*S,fill:`url(#${wid})`,class:'sweep'},sweepG);
+    for(const e of geo.internal){const [[y1,x1],[y2,x2]]=geo.edgeVerts(e);mk('line',{x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),class:'pencil'},this.g.grid);}
+    const vs=new Set();for(const c of geo.cells){const r=(c/geo.w)|0,x=c%geo.w;for(const [dy,dx] of [[0,0],[0,1],[1,0],[1,1]])vs.add((r+dy)+','+(x+dx));}
+    for(const k of vs){const [y,x]=k.split(',').map(Number);mk('circle',{cx:this.X(x),cy:this.Y(y),r:2.6,class:'vert'},this.g.verts);}
+    this.wallEls=new Array(geo.nE);
+    for(const e of geo.internal){const [[y1,x1],[y2,x2]]=geo.edgeVerts(e);const a={x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),pathLength:100};
+      const g=mk('g',{class:'wall'},this.g.walls);mk('line',Object.assign({class:'lead'},a),g);mk('line',Object.assign({class:'core'},a),g);this.wallEls[e]=g;}
+    let d='';for(const e of geo.border){const [[y1,x1],[y2,x2]]=geo.edgeVerts(e);d+=`M${this.X(x1)} ${this.Y(y1)}L${this.X(x2)} ${this.Y(y2)}`;}
+    mk('path',{d,class:'border-lead'},this.g.border);mk('path',{d,class:'border-core'},this.g.border);
+    this.clueEls=P.ineq.map(q=>{const [[y1,x1],[y2,x2]]=geo.edgeVerts(q.e);const mx=(this.X(x1)+this.X(x2))/2,my=(this.Y(y1)+this.Y(y2))/2;
+      const dx=(q.small%geo.w)-(q.big%geo.w),dy=((q.small/geo.w)|0)-((q.big/geo.w)|0);
+      const ang=dx===-1?0:dx===1?180:dy===-1?90:-90;
+      const g=mk('g',{class:'clue',transform:`translate(${mx} ${my})`},this.g.clues);
+      mk('circle',{r:13},g);mk('path',{d:'M4 -7 L-4 0 L4 7',transform:`rotate(${ang})`},g);return g;});
+    this.hoverEl=mk('line',{class:'hover-line',x1:0,y1:0,x2:0,y2:0,visibility:'hidden'},this.g.hover);
+  }
+  paint(walls,ev,opts){
+    const P=this.P,geo=P.geo;const colorOf=new Array(ev.regions.length).fill(null);
+    const order=ev.regions.slice().sort((a,b)=>a.cells[0]-b.cells[0]);
+    for(const R of order){if(R.status!=='ok')continue;const used=new Set();
+      for(const c of R.cells)for(const [d] of geo.nbr[c]){const o=ev.reg[d];if(o!==R.id&&colorOf[o]!=null)used.add(colorOf[o]);}
+      let idx=(R.cells[0]*5+R.size*3)%PALETTE.length;for(let k=0;k<PALETTE.length&&used.has(idx);k++)idx=(idx+1)%PALETTE.length;colorOf[R.id]=idx;}
+    for(const c of geo.cells){const R=ev.regions[ev.reg[c]];const el=this.cellEls[c];
+      const glass=R.status==='ok'&&opts.color;const bad=R.status==='bad'&&opts.live;
+      el.classList.toggle('glass',glass);el.classList.toggle('bad',bad);el.style.fill=glass?PALETTE[colorOf[R.id]]:'';}
+    const dset=new Set(ev.dangling);
+    for(const e of geo.internal){const el=this.wallEls[e];el.classList.toggle('on',!!walls[e]);el.classList.toggle('given',!!P.givens[e]);el.classList.toggle('dangling',!!walls[e]&&opts.live&&dset.has(e));}
+    ev.ineqRes.forEach((x,i)=>{const el=this.clueEls[i];if(!el)return;el.classList.toggle('ok',x.ok);el.classList.toggle('bad',opts.live&&x.status==='bad');});
+  }
+  showHover(e){if(e==null){this.hoverEl.setAttribute('visibility','hidden');return;}
+    const [[y1,x1],[y2,x2]]=this.P.geo.edgeVerts(e);
+    this.hoverEl.setAttribute('x1',this.X(x1));this.hoverEl.setAttribute('y1',this.Y(y1));this.hoverEl.setAttribute('x2',this.X(x2));this.hoverEl.setAttribute('y2',this.Y(y2));
+    this.hoverEl.setAttribute('visibility','visible');}
+  flashEdge(e,kind){const [[y1,x1],[y2,x2]]=this.P.geo.edgeVerts(e);
+    const l=mk('line',{x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),class:kind==='add'?'hint-add':'hint-remove'},this.g.hover);setTimeout(()=>l.remove(),1900);}
+  flashCells(cells){for(const c of cells){const el=this.cellEls[c];if(!el)continue;el.classList.remove('flash');void el.getBoundingClientRect();el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800);}}
+  flashEdges(edges){for(const e of edges||[]){const el=this.wallEls[e];if(!el)continue;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800);}}
+}
+
+/* ================= App state ================= */
+const App={P:null,pz:null,key:null,meta:null,walls:null,undo:[],redo:[],hints:0,moves:0,elapsed:0,won:false,tool:'auto',ev:null};
+let MainBoard,TutBoard,saveTimer=null;
+function showError(msg){$('#errorText').textContent=msg;$('#errorBanner').hidden=false;}
+function toast(msg,ms=2200){const t=$('#toast');if(!t)return;t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,ms);}
+function setFeedback(msg,kind=''){const f=$('#feedback');f.textContent=msg;f.className='feedback '+kind;}
+function showScreen(name){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$('#screen'+name).classList.add('active');
+  if(name==='Levels')renderLevels();if(name==='Home')renderHome();window.scrollTo({top:0,behavior:'smooth'});}
+function openModal(id){document.getElementById(id).hidden=false;}
+function closeModal(id){document.getElementById(id).hidden=true;if(id==='modalTutorial'&&!Store.data.tutorialSeen){Store.data.tutorialSeen=true;Store.save();}}
+function anyModalOpen(){return [...document.querySelectorAll('.modal')].some(m=>!m.hidden);}
+function withLoading(text,fn){$('#loadingText').textContent=text;$('#loading').hidden=false;
+  setTimeout(()=>{try{fn();}catch(e){console.error(e);showError('เกิดข้อผิดพลาด: '+(e&&e.message?e.message:e));}finally{$('#loading').hidden=true;}},60);}
+const sigOf=pz=>hashStr(JSON.stringify([pz.w,pz.h,pz.mask,pz.givens,pz.ineq,pz.rules]));
+
+function loadPuzzle(pz,key,meta){
+  const P=prepare(pz);
+  App.P=P;App.pz=pz;App.key=key;App.meta=meta;App.walls=new Uint8Array(P.geo.nE);
+  for(const e of (pz.givens||[]))App.walls[e]=1;
+  App.undo=[];App.redo=[];App.hints=0;App.moves=0;App.elapsed=0;App.won=false;
+  const sv=Store.data.progress[key];
+  if(sv&&sv.sig===sigOf(pz)){for(const e of sv.walls||[])if(P.geo.isInt[e])App.walls[e]=1;App.hints=sv.hints||0;App.moves=sv.moves||0;App.elapsed=sv.elapsed||0;}
+  Store.data.last=meta;Store.save();
+  $('#boardFrame').classList.remove('won');$('#errorList').replaceChildren();$('#shards').replaceChildren();
+  MainBoard.build(P);renderRules();renderLevelBar();
+  const ev=evaluate(P,App.walls);
+  if(ev.solved){App.won=true;$('#boardFrame').classList.add('won');setFeedback('หน้าต่างบานนี้บูรณะเสร็จแล้ว — กด “เริ่มใหม่” เพื่อเล่นอีกครั้ง','ok');}
+  else setFeedback(introText(P),'info');
+  update(false);showScreen('Game');
+}
+function introText(P){const r=P.rules;const parts=[];
+  if(r.precision)parts.push(`ทุกพื้นที่ต้องมี ${r.precision} ช่อง`);
+  if(r.shapes)parts.push('ใช้เฉพาะรูปทรงที่อนุญาต');
+  if(r.patterns)parts.push('ตรงกับแบบแผนโดยไม่หมุน');
+  if(r.inequality)parts.push('ปลายแหลมชี้ไปยังพื้นที่ที่เล็กกว่า');
+  return 'แตะเส้นดินสอเพื่อวางเส้นตะกั่ว หรือลากเพื่อวาดต่อเนื่อง · '+parts.join(' · ');}
+function renderLevelBar(){
+  const pz=App.pz,m=App.meta;
+  if(m.type==='level'){$('#lvlTitle').textContent=`บทที่ ${m.ci+1} · ด่านที่ ${m.li+1}`;$('#lvlSub').textContent=`${CHAPTERS[m.ci].name} — ${CHAPTERS[m.ci].theme}`;}
+  else{$('#lvlTitle').textContent='ปริศนาสุ่ม';$('#lvlSub').textContent=`${THEME_TH[pz.theme]||'ผสม'} · ${pz.w}×${pz.h}`;}
+  const d=pz.difficulty||'medium';const c=$('#chipDiff');c.textContent=DIFF_TH[d];c.className='chip '+d;
+  const u=$('#chipUnique');u.textContent=pz.unique?'✓ คำตอบเดียว':'มีคำตอบแน่นอน';
+  u.title=pz.unique?'เครื่องแก้ตรวจแล้วว่ามีคำตอบเดียว':'ปริศนาสร้างจากคำตอบจริง จึงมีคำตอบอย่างน้อยหนึ่งแบบ (การตรวจคำตอบเดียวเกินขีดจำกัดการค้นหา)';
+  $('#chipTimer').textContent=fmt(App.elapsed);}
+function update(fromUser){
+  if(!App.P)return;const ev=evaluate(App.P,App.walls);App.ev=ev;
+  MainBoard.paint(App.walls,ev,Store.data.settings);updateRuleStatus(ev);
+  $('#statMoves').textContent=App.moves;$('#statHints').textContent=App.hints;
+  $('#statRegions').textContent=ev.regions.filter(r=>r.status==='ok').length+'/'+ev.regions.length;
+  $('#btnUndo').disabled=!App.undo.length;$('#btnRedo').disabled=!App.redo.length;
+  $('#boardFrame').classList.toggle('locked',App.won);
+  if(fromUser&&ev.solved&&!App.won)victory();}
+function saveProgressSoon(){clearTimeout(saveTimer);saveTimer=setTimeout(saveProgress,250);}
+function saveProgress(){if(!App.P)return;const g=App.P.geo;
+  Store.data.progress[App.key]={sig:sigOf(App.pz),walls:g.internal.filter(e=>App.walls[e]&&!App.P.givens[e]),hints:App.hints,moves:App.moves,elapsed:App.elapsed,won:App.won};
+  Store.save();}
+
+/* ================= Rules panel ================= */
+function glyph(cells,color){const n=Poly.norm(cells);const H=Math.max(...n.map(p=>p[0]))+1,W=Math.max(...n.map(p=>p[1]))+1,s=12;
+  return `<svg class="glyph" viewBox="-2 -2 ${W*s+4} ${H*s+4}" width="${W*s+4}" height="${H*s+4}" aria-hidden="true">${n.map(([r,c])=>`<rect x="${c*s}" y="${r*s}" width="${s}" height="${s}" rx="1.5" fill="${color}" stroke="#2d3137" stroke-width="1.8"/>`).join('')}</svg>`;}
+function renderRules(){
+  const r=App.P.rules,box=$('#rulesList');box.innerHTML='';
+  const card=(id,icon,title,desc,prov,extra='')=>{const d=document.createElement('div');d.className='rule-card';d.id='rule-'+id;
+    d.innerHTML=`<div class="rule-top"><div class="rule-icon">${icon}</div><div class="rule-title">${title}${prov?'<span class="prov">ชั่วคราว</span>':''}</div><div class="rule-status">…</div></div>${extra}<div class="rule-desc">${desc}</div>`;box.appendChild(d);};
+  if(r.precision)card('precision',`<span class="num-badge">${r.precision}</span>`,`ความแม่นยำ (${r.precision})`,`ทุกพื้นที่ต้องมี <b>${r.precision} ช่องพอดี</b>`,false);
+  if(r.shapes)card('shape',glyph([[0,0],[1,0],[1,1]],'#3f9b78'),'รูปทรงที่อนุญาต','ทุกพื้นที่ต้องเป็นหนึ่งในรูปทรงเหล่านี้ — <b>หมุนหรือพลิกได้</b>',true,`<div class="glyphs">${r.shapes.map((s,i)=>glyph(s,PALETTE[(i+2)%8])).join('')}</div>`);
+  if(r.patterns)card('pattern',glyph([[0,0],[0,1],[1,1]],'#8a5fb0'),'แบบแผนบัญญัติ','ทุกพื้นที่ต้องตรงกับแบบแผนที่แสดง — <b>ทิศทางตายตัว ห้ามหมุนหรือพลิก</b>',true,`<div class="glyphs">${r.patterns.map((s,i)=>glyph(s,PALETTE[(i+4)%8])).join('')}</div>`);
+  if(r.inequality)card('ineq','<svg width="30" height="30" viewBox="-15 -15 30 30"><circle r="13" fill="#fff8e6" stroke="#b78a3e" stroke-width="2.2"/><path d="M4 -7 L-4 0 L4 7" fill="none" stroke="#3b2f24" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>','อสมการ','ปลายแหลมของสัญลักษณ์ชี้ไปยัง <b>พื้นที่ที่เล็กกว่า</b> (สองฝั่งจึงต้องเป็นคนละพื้นที่)',false);
+  card('bound','<svg width="30" height="30" viewBox="0 0 30 30"><line x1="4" y1="15" x2="26" y2="15" stroke="#2d3137" stroke-width="7" stroke-linecap="round"/><line x1="4" y1="15" x2="26" y2="15" stroke="#7a838e" stroke-width="2" stroke-linecap="round"/></svg>','เส้นตะกั่ว','ทุกเส้นต้องเป็นขอบระหว่างสองพื้นที่ที่ต่างกัน ห้ามมีเส้นลอย'+((App.pz.givens||[]).length?' · <b>เส้นแกนทอง</b>คือเส้นตั้งต้นที่แก้ไขไม่ได้':''),true);}
+function updateRuleStatus(ev){
+  const set=(id,state,n)=>{const el=document.querySelector('#rule-'+id+' .rule-status');if(!el)return;el.className='rule-status '+state;
+    el.textContent=state==='ok'?'✓ ผ่าน':state==='bad'?`✗ ผิด ${n}`:'… ยังไม่ครบ';};
+  const by=k=>{const bad=ev.regions.filter(R=>R.issues.includes(k)&&R.status==='bad').length;const any=ev.regions.some(R=>R.issues.includes(k));return [bad?'bad':(any?'pending':'ok'),bad];};
+  set('precision',...by('precision'));set('shape',...by('shape'));set('pattern',...by('pattern'));
+  const ib=ev.ineqRes.filter(x=>x.status==='bad').length;set('ineq',ib?'bad':(ev.ineqRes.every(x=>x.ok)?'ok':'pending'),ib);
+  set('bound',ev.dangling.length?'bad':'ok',ev.dangling.length);}
+
+/* ================= Input ================= */
+const Input={drag:null};
+function svgPoint(ev){const svg=MainBoard.svg;const m=svg.getScreenCTM();if(!m)return null;const pt=svg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;
+  const p=pt.matrixTransform(m.inverse());return {gx:(p.x-MainBoard.PAD)/MainBoard.S,gy:(p.y-MainBoard.PAD)/MainBoard.S};}
+function nearestVertex(p){const y=Math.round(p.gy),x=Math.round(p.gx);return {v:[y,x],d:Math.hypot(p.gy-y,p.gx-x)};}
+function setEdge(e,to,changes){if(App.walls[e]===to)return;if(!changes.has(e))changes.set(e,App.walls[e]);App.walls[e]=to;Sound.play(to?'draw':'erase');}
+function dragEdge(e){const P=App.P,d=Input.drag;if(!P.geo.isInt[e]||P.givens[e])return;
+  if(d.mode===null)d.mode=App.tool==='draw'?1:App.tool==='erase'?0:(App.walls[e]?0:1);
+  setEdge(e,d.mode,d.changes);update(false);}
+function commit(changes){const list=[];for(const [e,from] of changes){const to=App.walls[e];if(from!==to)list.push({e,from,to});}
+  if(!list.length){update(false);return;}
+  App.undo.push(list);if(App.undo.length>600)App.undo.shift();App.redo=[];App.moves++;$('#errorList').replaceChildren();
+  saveProgressSoon();update(true);}
+function bindBoardInput(){
+  const svg=MainBoard.svg;
+  svg.addEventListener('pointerdown',ev=>{if(!App.P||ev.button>0)return;ev.preventDefault();
+    if(App.won){setFeedback('หน้าต่างบานนี้เสร็จแล้ว — กด “ย้อน” หรือ “เริ่มใหม่” หากต้องการแก้ไข','ok');return;}
+    const p=svgPoint(ev);if(!p)return;try{svg.setPointerCapture(ev.pointerId);}catch(e){}
+    const nv=nearestVertex(p);Input.drag={id:ev.pointerId,start:p,last:nv.d<0.4?nv.v:null,mode:null,changes:new Map(),moved:false};MainBoard.showHover(null);});
+  svg.addEventListener('pointermove',ev=>{if(!App.P)return;const p=svgPoint(ev);if(!p)return;const d=Input.drag;
+    if(!d){if(ev.pointerType==='mouse'&&!App.won){const ne=nearestEdgeAt(App.P.geo,p.gx,p.gy);MainBoard.showHover(ne&&ne.d<0.3&&!App.P.givens[ne.e]?ne.e:null);}return;}
+    if(ev.pointerId!==d.id)return;
+    if(!d.moved&&Math.hypot(p.gx-d.start.gx,p.gy-d.start.gy)>0.28)d.moved=true;if(!d.moved)return;
+    const nv=nearestVertex(p);if(nv.d>0.36)return;
+    if(!d.last){d.last=nv.v;return;}
+    if(nv.v[0]===d.last[0]&&nv.v[1]===d.last[1])return;
+    for(const e of pathSegments(App.P.geo,d.last,nv.v))dragEdge(e);d.last=nv.v;});
+  const end=ev=>{const d=Input.drag;if(!d||ev.pointerId!==d.id)return;Input.drag=null;
+    if(!d.moved){const ne=nearestEdgeAt(App.P.geo,d.start.gx,d.start.gy);
+      if(ne&&ne.d<0.32){if(App.P.givens[ne.e]){setFeedback('เส้นแกนทองเป็นเส้นตั้งต้นของหน้าต่าง แก้ไขไม่ได้','info');}
+        else{const to=App.tool==='draw'?1:App.tool==='erase'?0:(App.walls[ne.e]?0:1);setEdge(ne.e,to,d.changes);}}}
+    commit(d.changes);};
+  svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+  svg.addEventListener('pointerleave',()=>{if(!Input.drag)MainBoard.showHover(null);});}
+
+/* ================= Actions ================= */
+function afterHistory(){const ev=evaluate(App.P,App.walls);if(App.won&&!ev.solved){App.won=false;$('#boardFrame').classList.remove('won');}
+  $('#errorList').replaceChildren();saveProgressSoon();update(true);}
+function undo(){if(!App.P||!App.undo.length)return;const b=App.undo.pop();for(const c of b)App.walls[c.e]=c.from;App.redo.push(b);Sound.play('erase');afterHistory();}
+function redo(){if(!App.P||!App.redo.length)return;const b=App.redo.pop();for(const c of b)App.walls[c.e]=c.to;App.undo.push(b);Sound.play('draw');afterHistory();}
+function restart(){if(!App.P)return;confirmDialog('ลบเส้นตะกั่วทั้งหมดที่คุณวาด แล้วเริ่มหน้าต่างนี้ใหม่? (กด “ย้อน” เพื่อเรียกคืนได้)',()=>{
+  const list=[];for(const e of App.P.geo.internal){if(App.P.givens[e]||!App.walls[e])continue;list.push({e,from:1,to:0});App.walls[e]=0;}
+  if(list.length){App.undo.push(list);App.redo=[];}
+  App.won=false;App.elapsed=0;$('#boardFrame').classList.remove('won');$('#errorList').replaceChildren();
+  setFeedback(introText(App.P),'info');saveProgress();update(false);});}
+function useHint(){
+  if(!App.P)return;if(App.won){setFeedback('หน้าต่างนี้เสร็จสมบูรณ์แล้ว','ok');return;}
+  const P=App.P,geo=P.geo,sol=P.solution;if(!sol){setFeedback('ปริศนานี้ไม่มีข้อมูลคำใบ้','bad');return;}
+  const wrong=geo.internal.filter(e=>App.walls[e]&&!sol[e]&&!P.givens[e]);let e,to,msg;
+  if(wrong.length){const dset=new Set(App.ev?App.ev.dangling:[]);const pref=wrong.filter(x=>!dset.has(x));const src=pref.length?pref:wrong;
+    e=src[Math.floor(Math.random()*src.length)];to=0;
+    msg='คำใบ้: เส้นที่กะพริบสีแดงไม่อยู่ในคำตอบ — นำออกให้แล้ว';}
+  else{const missing=geo.internal.filter(x=>sol[x]&&!App.walls[x]);
+    if(!missing.length){setFeedback('เส้นครบตามคำตอบแล้ว ลองกด “ตรวจ”','info');return;}
+    const deg=new Map();const inc=v=>{const k=v[0]+','+v[1];deg.set(k,(deg.get(k)||0)+1);};
+    for(const x of geo.internal)if(App.walls[x])geo.edgeVerts(x).forEach(inc);for(const x of geo.border)geo.edgeVerts(x).forEach(inc);
+    let best=-1,cands=[];for(const x of missing){const s=geo.edgeVerts(x).reduce((a,v)=>a+(deg.get(v[0]+','+v[1])||0),0);
+      if(s>best){best=s;cands=[x];}else if(s===best)cands.push(x);}
+    e=cands[Math.floor(Math.random()*cands.length)];to=1;msg='คำใบ้: เพิ่มเส้นตะกั่วที่ถูกต้องให้ 1 เส้น (กะพริบสีเขียว)';}
+  const from=App.walls[e];App.walls[e]=to;App.undo.push([{e,from,to}]);App.redo=[];App.hints++;App.moves++;
+  MainBoard.flashEdge(e,to?'add':'remove');Sound.play('hint');setFeedback(msg,'info');$('#errorList').replaceChildren();saveProgressSoon();update(true);}
+function checkBoard(){
+  if(!App.P)return;const ev=evaluate(App.P,App.walls);const items=explain(App.P,ev);const ul=$('#errorList');ul.replaceChildren();
+  if(ev.solved){setFeedback('ถูกต้องทุกกฎ!','ok');return;}
+  const hard=items.filter(i=>!i.soft);
+  if(hard.length){setFeedback(`พบการละเมิดกฎ ${hard.length} จุด — แตะรายการเพื่อดูตำแหน่ง`,'bad');Sound.play('bad');}
+  else setFeedback('ยังไม่พบการละเมิดกฎ แต่ยังมีพื้นที่ที่ต้องแบ่งเพิ่ม','info');
+  items.slice(0,14).forEach(it=>{const li=document.createElement('li');li.textContent=it.text;if(it.soft)li.className='soft';
+    li.addEventListener('click',()=>{MainBoard.flashCells(it.cells||[]);MainBoard.flashEdges(it.edges);});ul.appendChild(li);});
+  if(items.length>14){const li=document.createElement('li');li.className='soft';li.textContent=`…และอีก ${items.length-14} รายการ`;ul.appendChild(li);}
+  hard.forEach(it=>{MainBoard.flashCells(it.cells||[]);MainBoard.flashEdges(it.edges);});}
+function starsFor(h){return h===0?3:h<=2?2:1;}
+function victory(){
+  App.won=true;const stars=starsFor(App.hints);
+  if(App.meta.type==='level'){const old=Store.data.completed[App.key];
+    Store.data.completed[App.key]={stars:Math.max(stars,old?old.stars:0),time:old?Math.min(old.time,App.elapsed):App.elapsed};}
+  else Store.data.randomSolved=(Store.data.randomSolved||0)+1;
+  saveProgress();Sound.play('win');$('#boardFrame').classList.add('won');spawnShards();
+  setFeedback('สำเร็จ! กระจกทุกชิ้นเป็นไปตามกฎ','ok');update(false);
+  setTimeout(()=>openVictory(stars),1100);}
+function spawnShards(){const box=$('#shards');box.replaceChildren();
+  for(let i=0;i<44;i++){const s=document.createElement('span');s.className='shard';s.style.left=(Math.random()*100)+'%';s.style.background=PALETTE[i%8];
+    s.style.animationDuration=(1.6+Math.random()*1.6)+'s';s.style.animationDelay=(Math.random()*0.5)+'s';
+    s.style.setProperty('--rot',(Math.random()*720-360)+'deg');s.style.setProperty('--dx',(Math.random()*90-45)+'px');box.appendChild(s);}
+  setTimeout(()=>box.replaceChildren(),4200);}
+function nextLevelOf(meta){if(meta.type!=='level')return null;const k=FLAT.findIndex(([a,b])=>a===meta.ci&&b===meta.li);return FLAT[k+1]||null;}
+function openVictory(stars){
+  $('#vicStars').innerHTML=[1,2,3].map(i=>`<span class="${i<=stars?'on':''}">★</span>`).join('');
+  $('#vicTime').textContent=fmt(App.elapsed);$('#vicMoves').textContent=App.moves;$('#vicHints').textContent=App.hints;
+  const nx=nextLevelOf(App.meta);const b=$('#btnVicNext');
+  if(App.meta.type==='random'){b.textContent='ปริศนาสุ่มใหม่';b.hidden=false;$('#vicMsg').textContent='ปริศนาสุ่มไขสำเร็จ — ลองอีกบานไหม?';}
+  else if(nx){b.textContent='ด่านถัดไป';b.hidden=false;$('#vicMsg').textContent=nx[0]!==App.meta.ci?`ปลดล็อกบทใหม่: ${CHAPTERS[nx[0]].name}!`:'ปลดล็อกด่านถัดไปแล้ว';}
+  else{b.hidden=true;$('#vicMsg').textContent='คุณบูรณะทุกหน้าต่างบนเกาะแล้ว! ลองปริศนาสุ่มต่อได้เลย';}
+  openModal('modalVictory');}
+let confirmCb=null;
+function confirmDialog(text,cb){$('#confirmText').textContent=text;confirmCb=cb;openModal('modalConfirm');}
+
+/* ================= Levels & home ================= */
+function isUnlocked(ci,li){const k=FLAT.findIndex(([a,b])=>a===ci&&b===li);if(k<=0)return true;const [pc,pl]=FLAT[k-1];
+  return !!Store.data.completed[levelId(pc,pl)]||!!Store.data.completed[levelId(ci,li)];}
+function firstOpenLevel(){for(const [ci,li] of FLAT)if(!Store.data.completed[levelId(ci,li)]&&isUnlocked(ci,li))return [ci,li];return FLAT[FLAT.length-1];}
+function getLevelPuzzle(ci,li){const id=levelId(ci,li);let pz=Store.cacheGet(id);
+  if(pz){try{const P=prepare(pz);if(!P.solution||!evaluate(P,P.solution).solved)pz=null;}catch(e){pz=null;}}
+  if(!pz){pz=generate(CHAPTERS[ci].levels[li],hashStr('isle-of-glass/'+id));Store.cacheSet(id,pz);}
+  return pz;}
+function openLevel(ci,li){if(!isUnlocked(ci,li)){toast('ไขด่านก่อนหน้าให้สำเร็จก่อน');return;}
+  withLoading('กำลังเป่าแก้วและตรวจคำตอบ…',()=>{const pz=getLevelPuzzle(ci,li);loadPuzzle(pz,levelId(ci,li),{type:'level',ci,li});});}
+function renderLevels(){const box=$('#chapterList');box.replaceChildren();
+  CHAPTERS.forEach((ch,ci)=>{const done=ch.levels.filter((_,li)=>Store.data.completed[levelId(ci,li)]).length;
+    const card=document.createElement('div');card.className='chapter';
+    card.innerHTML=`<div class="chapter-head"><div class="chapter-glass" style="--c:${ch.color}"></div><div><div class="chapter-name">บทที่ ${ci+1} · ${ch.name}</div><div class="chapter-sub">${ch.theme} — สำเร็จ ${done}/${ch.levels.length}</div></div></div><p class="chapter-desc">${ch.desc}</p><div class="level-grid"></div>`;
+    const grid=card.querySelector('.level-grid');
+    ch.levels.forEach((lv,li)=>{const id=levelId(ci,li),un=isUnlocked(ci,li),c=Store.data.completed[id];
+      const b=document.createElement('button');b.className='level-btn'+(c?' done':'')+(un?'':' locked');b.disabled=!un;
+      b.setAttribute('aria-label',`ด่านที่ ${li+1}`);
+      b.innerHTML=`<span class="lv-num">${li+1}</span><span class="lv-meta">${lv.w}×${lv.h} · ${DIFF_TH[lv.difficulty]}</span><span class="lv-stars">${c?'★'.repeat(c.stars)+'☆'.repeat(3-c.stars):(un?'':'ล็อก')}</span>`;
+      b.addEventListener('click',()=>openLevel(ci,li));grid.appendChild(b);});
+    box.appendChild(card);});}
+function renderHome(){const total=FLAT.length;const done=FLAT.filter(([a,b])=>Store.data.completed[levelId(a,b)]).length;
+  $('#homeProgress').textContent=`บูรณะแล้ว ${done} / ${total} หน้าต่าง · ไขปริศนาสุ่ม ${Store.data.randomSolved||0} บาน`;
+  $('#btnContinue').textContent=Store.data.last?'เล่นต่อ':'เริ่มผจญภัย';}
+function continueGame(){const l=Store.data.last;
+  if(l&&l.type==='random'&&Store.data.random){try{loadPuzzle(Store.data.random,'random',{type:'random'});return;}catch(e){showError('โหลดปริศนาสุ่มไม่สำเร็จ: '+e.message);}}
+  if(l&&l.type==='level'&&CHAPTERS[l.ci]&&CHAPTERS[l.ci].levels[l.li]&&isUnlocked(l.ci,l.li)){openLevel(l.ci,l.li);return;}
+  const [ci,li]=firstOpenLevel();openLevel(ci,li);}
+function generateRandom(diff,theme){const seed=(Date.now()^Math.floor(Math.random()*1e9))>>>0;const rng=mulberry32(seed);let last;
+  for(let i=0;i<6;i++){const spec=randomSpec(diff,theme,rng);
+    try{const pz=generate(spec,(seed+i*7919)>>>0,9000);pz.theme=theme==='any'?spec.theme:theme;return pz;}catch(e){last=e;}}
+  throw last||new Error('สร้างปริศนาไม่สำเร็จ');}
+function startRandom(){const pr=Store.data.randomPrefs;closeModal('modalRandom');
+  withLoading('กำลังสร้างปริศนาสุ่มและพิสูจน์คำตอบ…',()=>{const pz=generateRandom(pr.diff,pr.theme);
+    Store.data.random=pz;delete Store.data.progress.random;Store.save();loadPuzzle(pz,'random',{type:'random'});});}
+function drawRosette(){const g=$('#rosette');let s='<g class="spin">';
+  for(let i=0;i<12;i++)s+=`<ellipse cx="0" cy="-62" rx="17" ry="36" transform="rotate(${i*30})" fill="${PALETTE[i%8]}" fill-opacity=".88" stroke="#2d3137" stroke-width="4"/>`;
+  for(let i=0;i<6;i++)s+=`<ellipse cx="0" cy="-30" rx="12" ry="22" transform="rotate(${i*60+30})" fill="${PALETTE[(i+3)%8]}" fill-opacity=".9" stroke="#2d3137" stroke-width="3.5"/>`;
+  s+='</g><circle r="100" fill="none" stroke="#2d3137" stroke-width="7"/><circle r="100" fill="none" stroke="#b78a3e" stroke-width="2"/><circle r="15" fill="#e0a43a" stroke="#2d3137" stroke-width="4"/>';
+  s+='<ellipse cx="-30" cy="-45" rx="40" ry="16" transform="rotate(-35)" fill="#fff" opacity=".18"/>';g.innerHTML=s;}
+
+/* ================= Tutorial ================= */
+const TUT=[
+ {title:'ยินดีต้อนรับสู่เกาะแห่งกระจก',html:'คุณคือช่างกระจกสีที่ได้รับมอบหมายให้บูรณะหน้าต่างบนเกาะ แต่ละด่านคือกระดานตาราง ภารกิจคือ <b>วาดเส้นตะกั่วเพื่อแบ่งกระดานออกเป็นพื้นที่</b> ให้ทุกพื้นที่เป็นไปตามกฎที่แสดงข้างกระดาน เมื่อถูกทุกกฎ หน้าต่างจะส่องประกาย',
+  demo:{w:3,h:2,rules:{precision:3},rows:['000','111']}},
+ {title:'วิธีวาดเส้น',html:'<b>แตะ</b> เส้นดินสอระหว่างสองช่องเพื่อวาดหรือลบเส้นตะกั่ว<br><b>ลาก</b> จากจุดมุมไปตามเส้นตารางเพื่อวาดหลายเส้นต่อเนื่อง — ถ้าเส้นแรกที่ลากผ่านมีอยู่แล้ว การลากครั้งนั้นจะเป็นการลบ<br>เลือกโหมด <b>วาด</b> หรือ <b>ลบ</b> ได้จากแถบเครื่องมือ ส่วน <b>เส้นแกนทอง</b> คือเส้นตั้งต้นที่แก้ไขไม่ได้',
+  demo:{w:4,h:3,rules:{precision:4},rows:['0011','0011','2222'],givenPairs:[[1,2]]}},
+ {title:'พื้นที่และเส้นลอย',html:'<b>พื้นที่</b> คือกลุ่มช่องที่เชื่อมถึงกันโดยไม่มีเส้นตะกั่วกั้น ทุกเส้นต้องเป็นขอบระหว่างสองพื้นที่ที่ต่างกัน เส้นที่ยังไม่ปิดล้อม (<span class="red">เส้นลอย</span>) จะเป็นสีแดง <span class="prov">ชั่วคราว</span>',
+  demo:{w:3,h:2,rules:{precision:3},pairs:[[0,1]]}},
+ {title:'กฎความแม่นยำ (N)',html:'ทุกพื้นที่ต้องมี <b>N ช่องพอดี</b> ในตัวอย่างนี้ N = 4 ทั้งสองพื้นที่มี 4 ช่อง พื้นที่ที่ผ่านกฎจะกลายเป็นกระจกสี ส่วนพื้นที่ที่ยังใหญ่เกินไปจะยังเป็นกระดาษอยู่',
+  demo:{w:4,h:2,rules:{precision:4},rows:['0111','0001']}},
+ {title:'กฎรูปทรงที่อนุญาต',html:'ทุกพื้นที่ต้องเป็น <b>หนึ่งในรูปทรงที่แสดง</b> โดยหมุนหรือพลิกได้ <span class="prov">ชั่วคราว</span> ตัวอย่าง: อนุญาตเฉพาะแท่งสามและมุมสาม — มุมสามสองชิ้นวางคนละทิศได้',
+  demo:{w:3,h:3,rules:{shapes:['I3','L3']},rows:['000','122','112']}},
+ {title:'กฎแบบแผนบัญญัติ',html:'ทุกพื้นที่ต้องตรงกับ <b>แบบแผนที่แสดงในทิศทางเดิม</b> ห้ามหมุนหรือพลิก <span class="prov">ชั่วคราว</span> ตัวอย่าง: แบบแผนคือโดมิโนแนวนอน ถ้าวางโดมิโนแนวตั้งจะผิดกฎ',
+  demo:{w:4,h:2,rules:{patterns:['I2h']},rows:['0011','2233']}},
+ {title:'กฎอสมการ',html:'สัญลักษณ์บนเส้นมี <b>ปลายแหลมชี้ไปยังพื้นที่ที่เล็กกว่า</b> ตัวอย่าง: ฝั่งปลายแหลมมี 2 ช่อง อีกฝั่งมี 4 ช่อง จึงถูกต้อง สัญลักษณ์จะเป็นสีเขียวเมื่อผ่าน และสีแดงเมื่อผิด',
+  demo:{w:3,h:2,rules:{shapes:['I2','O4'],inequality:true},rows:['011','011'],ineq:[[0,1]]}},
+ {title:'เครื่องมือช่าง',html:'<b>ย้อน / ทำซ้ำ</b> — ยกเลิกหรือทำการแก้ไขซ้ำ (Ctrl+Z / Ctrl+Y)<br><b>เริ่มใหม่</b> — ล้างเส้นทั้งหมดที่คุณวาด<br><b>คำใบ้</b> — นำเส้นผิดออก หรือเพิ่มเส้นที่ถูกให้ 1 เส้น (มีผลต่อดาว)<br><b>ตรวจ</b> — อธิบายทุกกฎที่ถูกละเมิด แตะรายการเพื่อดูตำแหน่ง<br>ความคืบหน้าบันทึกในเครื่องอัตโนมัติ ไม่ใช้คำใบ้ได้ ★★★'}
+];
+let tutIdx=0;
+function rowsToWalls(geo,rows){const walls=new Uint8Array(geo.nE);
+  for(let y=0;y<geo.h;y++)for(let x=0;x<geo.w;x++){
+    if(x+1<geo.w){const e=geo.vId(y,x+1);if(geo.isInt[e]&&rows[y][x]!==rows[y][x+1])walls[e]=1;}
+    if(y+1<geo.h){const e=geo.hId(y+1,x);if(geo.isInt[e]&&rows[y][x]!==rows[y+1][x])walls[e]=1;}}
+  return walls;}
+function buildDemo(d){const rules=resolveRules(d.rules);
+  const pz={w:d.w,h:d.h,mask:'1'.repeat(d.w*d.h),rules,givens:[],ineq:(d.ineq||[]).map(([s,b])=>({small:s,big:b}))};
+  const geo=new Geo(d.w,d.h,Uint8Array.from(pz.mask,c=>c==='1'?1:0));
+  if(d.givenPairs)pz.givens=d.givenPairs.map(([a,b])=>geo.between(a,b));
+  const walls=d.rows?rowsToWalls(geo,d.rows):new Uint8Array(geo.nE);
+  for(const e of pz.givens)walls[e]=1;
+  if(d.pairs)for(const [a,b] of d.pairs)walls[geo.between(a,b)]=1;
+  return {pz,walls};}
+function showTutorialStep(){
+  const s=TUT[tutIdx];
+  $('#tutStep').textContent=`บทเรียนที่ ${tutIdx+1} / ${TUT.length}`;
+  $('#tutTitle').textContent=s.title;$('#tutText').innerHTML=s.html;
+  $('#tutPrev').disabled=tutIdx===0;
+  $('#tutNext').textContent=tutIdx===TUT.length-1?'เริ่มเล่น':'ถัดไป';
+  $('#tutDots').innerHTML=TUT.map((_,i)=>`<i class="${i===tutIdx?'on':''}"></i>`).join('');
+  $('#tutDemo').hidden=!s.demo;
+  if(s.demo){try{const {pz,walls}=buildDemo(s.demo);const P=prepare(pz);
+      if(!TutBoard)TutBoard=new BoardView($('#tutSvg'),'tut');
+      TutBoard.build(P);TutBoard.paint(walls,evaluate(P,walls),{live:true,color:true});}
+    catch(e){console.error(e);$('#tutDemo').hidden=true;showError('แสดงภาพตัวอย่างไม่ได้: '+e.message);}}}
+function openTutorial(i=0){tutIdx=i;showTutorialStep();openModal('modalTutorial');}
+function tutNext(){if(tutIdx<TUT.length-1){tutIdx++;showTutorialStep();return;}
+  closeModal('modalTutorial');if(!$('#screenGame').classList.contains('active'))continueGame();}
+function tutPrev(){if(tutIdx>0){tutIdx--;showTutorialStep();}}
+
+/* ================= Settings ================= */
+function syncSettingsUI(){const s=Store.data.settings;$('#setLive').checked=!!s.live;$('#setColor').checked=!!s.color;$('#setSound').checked=!!s.sound;}
+function syncSeg(sel,val){document.querySelectorAll(sel+' .seg-btn').forEach(b=>b.classList.toggle('active',b.dataset.v===val));}
+function syncRandomUI(){const p=Store.data.randomPrefs;syncSeg('#randDiff',p.diff);syncSeg('#randTheme',p.theme);}
+function resetProgress(){closeModal('modalSettings');
+  confirmDialog('ล้างความคืบหน้า ดาว และปริศนาที่บันทึกไว้ทั้งหมด? การกระทำนี้ย้อนกลับไม่ได้',()=>{
+    const keepSettings=Store.data.settings;Store.data=Store.defaults();Store.data.settings=keepSettings;Store.data.tutorialSeen=true;Store.save();
+    App.P=null;App.won=false;showScreen('Home');toast('ล้างความคืบหน้าแล้ว');});}
+
+/* ================= System tests ================= */
+function runSystemTests(){
+  const results=[];const t0=now();
+  const ok=(c,m)=>{if(!c)throw new Error(m||'ไม่ผ่าน');};
+  const T=(name,fn)=>{const s=now();try{fn();results.push({name,pass:true,ms:now()-s});}
+    catch(e){results.push({name,pass:false,err:e&&e.message?e.message:String(e),ms:now()-s});}};
+  const mkP=(w,h,rules,extra={})=>prepare(Object.assign({w,h,mask:'1'.repeat(w*h),rules:resolveRules(rules),givens:[],ineq:[]},extra));
+  const run=(P,rows)=>{const walls=rows?rowsToWalls(P.geo,rows):new Uint8Array(P.geo.nE);return {walls,ev:evaluate(P,walls)};};
+
+  T('โพลีโอมิโน: จำนวนรูปทรงแบบตายตัว 1–5 ช่อง = 1, 2, 6, 19, 63',()=>{const exp=[1,2,6,19,63];
+    for(let n=1;n<=5;n++){const c=Poly.allFixed(n).length;ok(c===exp[n-1],`ขนาด ${n} ได้ ${c}`);}});
+  T('โพลีโอมิโน: จำนวนทิศหมุน/พลิก (L4=8, T4=4, S4=4, I4=2, O4=1)',()=>{
+    for(const [k,v] of [['L4',8],['T4',4],['S4',4],['I4',2],['O4',1]]){const c=Poly.transforms(SHAPES[k].cells).length;ok(c===v,`${k} ได้ ${c}`);}});
+  T('กริด: นับเส้นภายใน/ขอบ และแปลงช่อง↔เส้น',()=>{const g=new Geo(3,3,new Uint8Array(9).fill(1));
+    ok(g.nE===24&&g.internal.length===12&&g.border.length===12,'จำนวนเส้นผิด');
+    ok(g.between(0,1)===g.vId(0,1)&&g.between(0,3)===g.hId(1,0),'between ผิด');
+    for(const e of g.internal){const [a,b]=g.edgeCells(e);ok(g.between(a,b)===e,'edgeCells/between ไม่สอดคล้อง');}});
+  T('กริดมีรู: ช่องที่ถูกตัดไม่นับ และรอบรูเป็นขอบกระดาน',()=>{const g=new Geo(3,3,Uint8Array.from('111101111',c=>+c));
+    ok(g.cells.length===8,'จำนวนช่อง');ok(g.internal.length===8,'เส้นภายใน '+g.internal.length);ok(g.border.length===16,'เส้นขอบ '+g.border.length);});
+  T('ตรวจจับพื้นที่: ไม่มีเส้น = 1 พื้นที่, เส้นตั้งเต็มแนว = 2 พื้นที่',()=>{const P=mkP(4,4,{precision:4});
+    let r=computeRegions(P.geo,new Uint8Array(P.geo.nE));ok(r.regions.length===1&&r.regions[0].size===16,'ควรมี 1 พื้นที่');
+    const w=new Uint8Array(P.geo.nE);for(let y=0;y<4;y++)w[P.geo.vId(y,2)]=1;r=computeRegions(P.geo,w);
+    ok(r.regions.length===2&&r.regions.every(R=>R.size===8),'ควรมี 2 พื้นที่ขนาด 8');});
+  T('เส้นลอย: เส้นที่ไม่ปิดล้อมถูกตรวจพบ',()=>{const P=mkP(3,3,{precision:3});const w=new Uint8Array(P.geo.nE);w[P.geo.vId(0,1)]=1;
+    const ev=evaluate(P,w);ok(ev.dangling.length===1&&ev.regions.length===1&&!ev.solved,'ต้องพบเส้นลอย 1 เส้น');
+    ok(explain(P,ev).some(x=>x.text.includes('เส้นตะกั่ว')),'ต้องมีคำอธิบายเส้นลอย');});
+  T('วาดเส้นด้วยการลาก: เส้นทางระหว่างจุดมุม',()=>{const g=new Geo(4,4,new Uint8Array(16).fill(1));
+    const s=pathSegments(g,[1,0],[1,4]);ok(s.length===4&&s.every((e,i)=>e===g.hId(1,i)),'แนวนอนผิด');
+    const v=pathSegments(g,[0,2],[4,2]);ok(v.length===4&&v.every((e,i)=>e===g.vId(i,2)),'แนวตั้งผิด');
+    ok(g.segId([0,0],[1,1])===-1,'เส้นทแยงต้องใช้ไม่ได้');});
+  T('แตะเส้น: เลือกเส้นที่ใกล้ที่สุด และแตะขอบกระดานไม่ได้',()=>{const g=new Geo(4,4,new Uint8Array(16).fill(1));
+    let n=nearestEdgeAt(g,1.5,1.03);ok(n&&n.e===g.hId(1,1),'แนวนอน');
+    n=nearestEdgeAt(g,2.02,0.5);ok(n&&n.e===g.vId(0,2),'แนวตั้ง');
+    n=nearestEdgeAt(g,0.5,0.02);ok(!n||n.d>=0.32,'ขอบกระดานต้องไม่ถูกเลือก');});
+  T('กฎความแม่นยำ: ผ่านเมื่อทุกพื้นที่มี N ช่อง และอธิบายเมื่อผิด',()=>{const P=mkP(4,2,{precision:4});
+    ok(run(P,['0011','0011']).ev.solved,'2×2 สองชิ้นต้องผ่าน');ok(run(P,['0001','0111']).ev.solved,'ตัวแอลสองชิ้นต้องผ่าน');
+    const r=run(P,['0111','0011']);ok(!r.ev.solved&&r.ev.regions.some(R=>R.issues.includes('precision')&&R.status==='bad'),'3 ช่องต้องผิด');
+    ok(explain(P,r.ev).some(x=>x.text.includes('ความแม่นยำ')),'ต้องมีคำอธิบาย');});
+  T('กฎรูปทรง: หมุน/พลิกได้ และรูปนอกรายการผิด',()=>{let P=mkP(3,2,{shapes:['L3']});ok(run(P,['001','011']).ev.solved,'L3 สองทิศต้องผ่าน');
+    P=mkP(3,2,{shapes:['I3']});const r=run(P,['001','011']);ok(!r.ev.solved&&r.ev.regions.some(R=>R.issues.includes('shape')),'ต้องผิดกฎรูปทรง');
+    ok(explain(P,r.ev).some(x=>x.text.includes('รูปทรง')),'ต้องมีคำอธิบาย');});
+  T('กฎแบบแผน: ต้องตรงทิศทาง ห้ามหมุน',()=>{let P=mkP(2,2,{patterns:['I2h']});ok(run(P,['00','11']).ev.solved,'แนวนอนต้องผ่าน');
+    const r=run(P,['01','01']);ok(!r.ev.solved&&r.ev.regions.every(R=>R.issues.includes('pattern')),'แนวตั้งต้องผิด');
+    ok(explain(P,r.ev).some(x=>x.text.includes('แบบแผน')),'ต้องมีคำอธิบาย');
+    P=mkP(2,2,{shapes:['I2']});ok(run(P,['01','01']).ev.solved,'กฎรูปทรงต้องยอมให้หมุน');});
+  T('กฎอสมการ: ปลายแหลมชี้ไปยังฝั่งที่เล็กกว่า',()=>{const rules={shapes:['I2','O4'],inequality:true};
+    let P=mkP(3,2,rules,{ineq:[{small:0,big:1}]});ok(run(P,['011','011']).ev.solved,'2 < 4 ต้องผ่าน');
+    P=mkP(3,2,rules,{ineq:[{small:1,big:0}]});let r=run(P,['011','011']);ok(!r.ev.solved&&!r.ev.ineqRes[0].ok&&r.ev.ineqRes[0].status==='bad','4 < 2 ต้องผิด');
+    ok(explain(P,r.ev).some(x=>x.text.includes('อสมการ')),'ต้องมีคำอธิบาย');
+    r=run(P,null);ok(r.ev.ineqRes[0].same,'ต้องตรวจพบว่าเป็นพื้นที่เดียวกัน');});
+  T('ตัวแก้: 2×2 ความแม่นยำ 2 มี 2 คำตอบ',()=>{const r=solveCount(mkP(2,2,{precision:2}),{limit:10});ok(r.count===2&&!r.aborted,'ได้ '+r.count);});
+  T('ตัวแก้: เส้นตั้งต้นตัดคำตอบเหลือ 1',()=>{const g=new Geo(2,2,new Uint8Array(4).fill(1));
+    const P=mkP(2,2,{precision:2},{givens:[g.between(0,1)]});const r=solveCount(P,{limit:10});ok(r.count===1,'ได้ '+r.count);
+    ok(ownerToWalls(P.geo,r.sols[0])[g.between(0,1)]===1,'ต้องคงเส้นตั้งต้น');});
+  T('ตัวแก้: อสมการบังคับคำตอบเดียว',()=>{const P=mkP(3,1,{shapes:['I1','I2'],inequality:true},{ineq:[{small:0,big:1}]});
+    const r=solveCount(P,{limit:10});ok(r.count===1,'ได้ '+r.count);ok(evaluate(P,ownerToWalls(P.geo,r.sols[0])).solved,'คำตอบต้องผ่านการตรวจ');});
+  T('ตัวแก้: แบบแผนทิศตายตัวให้คำตอบเดียว',()=>{ok(solveCount(mkP(2,2,{patterns:['I2h']}),{limit:10}).count===1,'I2h');
+    ok(solveCount(mkP(2,2,{patterns:['I2v']}),{limit:10}).count===1,'I2v');});
+  T('ตัวแก้: กระดานที่เป็นไปไม่ได้ให้ 0 คำตอบ',()=>{const r=solveCount(mkP(3,1,{precision:2}),{limit:5});ok(r.count===0&&!r.aborted,'ได้ '+r.count);});
+  T('ตัวแก้ ↔ ตัวตรวจ: ทุกคำตอบที่พบต้องผ่าน (4×4 รูปทรงผสม)',()=>{const P=mkP(4,4,{shapes:['L3','I2','O4']});
+    const r=solveCount(P,{limit:25});ok(r.count>0,'ไม่พบคำตอบ');for(const s of r.sols)ok(evaluate(P,ownerToWalls(P.geo,s)).solved,'มีคำตอบที่ตัวตรวจไม่ยอมรับ');});
+  T('กฎขัดแย้ง: ความแม่นยำ 3 กับแบบแผน 2 ช่อง ต้องแจ้งข้อผิดพลาด',()=>{let threw=false;
+    try{generate({w:4,h:4,rules:{precision:3,patterns:['I2h']}},1,500);}catch(e){threw=true;}ok(threw,'ต้องโยนข้อผิดพลาด');});
+  const genSpecs=[['ความแม่นยำ',{w:4,h:4,rules:{precision:4},difficulty:'easy'}],
+    ['รูปทรง',{w:4,h:4,rules:{shapes:['I3','L3']},difficulty:'easy',holes:1}],
+    ['อสมการ',{w:4,h:4,rules:{shapes:['I1','I2','I3'],inequality:true},difficulty:'easy'}],
+    ['แบบแผน',{w:4,h:4,rules:{patterns:['I2h','I3v']},difficulty:'easy'}]];
+  genSpecs.forEach(([nm,spec],i)=>T(`ตัวสร้าง: ปริศนา${nm}มีคำตอบและตรวจซ้ำได้`,()=>{
+    const pz=generate(spec,1000+i*17,8000);const P=prepare(pz);
+    ok(P.solution&&evaluate(P,P.solution).solved,'คำตอบต้นแบบไม่ผ่าน');
+    const r=solveCount(P,{limit:2,nodeLimit:250000});ok(r.count>=1||r.aborted,'ตัวแก้หาคำตอบไม่พบ');
+    if(pz.unique)ok(r.count===1&&!r.aborted,'ระบุว่าคำตอบเดียวแต่พบมากกว่า');
+    for(const s of r.sols)ok(evaluate(P,ownerToWalls(P.geo,s)).solved,'คำตอบจากตัวแก้ไม่ผ่านตัวตรวจ');}));
+  T('ด่านแรกของทุกบทสร้างได้และมีคำตอบ',()=>{CHAPTERS.forEach((ch,ci)=>{const pz=getLevelPuzzle(ci,0);const P=prepare(pz);
+    ok(P.solution&&evaluate(P,P.solution).solved,`บทที่ ${ci+1}: คำตอบต้นแบบไม่ผ่าน`);
+    const r=solveCount(P,{limit:1,nodeLimit:250000});ok(r.count>=1||r.aborted,`บทที่ ${ci+1}: ตัวแก้ไม่พบคำตอบ`);});});
+  T('ด่านที่แคชไว้ทั้งหมดยังมีคำตอบถูกต้อง',()=>{FLAT.forEach(([ci,li])=>{const pz=Store.cacheGet(levelId(ci,li));if(!pz)return;
+    const P=prepare(pz);ok(P.solution&&evaluate(P,P.solution).solved,`${levelId(ci,li)} ผิด`);});});
+  T('บันทึกความคืบหน้า: ลายเซ็นปริศนาคงที่หลังแปลง JSON',()=>{const pz={w:2,h:2,mask:'1111',givens:[1],ineq:[],rules:resolveRules({precision:2})};
+    ok(sigOf(pz)===sigOf(JSON.parse(JSON.stringify(pz))),'ลายเซ็นเปลี่ยน');});
+
+  const passN=results.filter(r=>r.pass).length;
+  $('#testSummary').textContent=`ผ่าน ${passN} / ${results.length} รายการ · ใช้เวลา ${Math.round(now()-t0)} ms`;
+  const ul=$('#testResults');ul.replaceChildren();
+  for(const r of results){const li=document.createElement('li');if(!r.pass)li.className='fail';
+    li.textContent=(r.pass?'✓ ':'✗ ')+r.name+(r.pass?'':' — '+r.err)+` (${Math.round(r.ms)} ms)`;ul.appendChild(li);}
+  openModal('modalTests');}
+
+/* ================= Timer ================= */
+let tickN=0;
+function tick(){if(!App.P||App.won||document.hidden||anyModalOpen())return;
+  if(!$('#screenGame').classList.contains('active'))return;
+  App.elapsed++;$('#chipTimer').textContent=fmt(App.elapsed);if(++tickN%5===0)saveProgressSoon();}
+
+/* ================= Bindings ================= */
+function bindUI(){
+  $('#btnHome').addEventListener('click',()=>{if(App.P)saveProgress();showScreen('Home');});
+  $('#btnHelp').addEventListener('click',()=>openTutorial(0));
+  $('#btnSettings').addEventListener('click',()=>{syncSettingsUI();openModal('modalSettings');});
+  $('#errorClose').addEventListener('click',()=>{$('#errorBanner').hidden=true;});
+  $('#btnContinue').addEventListener('click',continueGame);
+  $('#btnLevels').addEventListener('click',()=>showScreen('Levels'));
+  $('#btnRandom').addEventListener('click',()=>{syncRandomUI();openModal('modalRandom');});
+  $('#btnTutorial').addEventListener('click',()=>openTutorial(0));
+  document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>{App.tool=b.dataset.tool;
+    document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('active',x===b));}));
+  $('#btnUndo').addEventListener('click',undo);$('#btnRedo').addEventListener('click',redo);
+  $('#btnRestart').addEventListener('click',restart);$('#btnHint').addEventListener('click',useHint);
+  $('#btnCheck').addEventListener('click',checkBoard);
+  $('#tutNext').addEventListener('click',tutNext);$('#tutPrev').addEventListener('click',tutPrev);
+  $('#btnVicStay').addEventListener('click',()=>closeModal('modalVictory'));
+  $('#btnVicLevels').addEventListener('click',()=>{closeModal('modalVictory');showScreen('Levels');});
+  $('#btnVicNext').addEventListener('click',()=>{closeModal('modalVictory');
+    if(App.meta&&App.meta.type==='random'){startRandom();return;}
+    const nx=App.meta?nextLevelOf(App.meta):null;if(nx)openLevel(nx[0],nx[1]);else showScreen('Levels');});
+  $('#randDiff').addEventListener('click',e=>{const b=e.target.closest('.seg-btn');if(!b)return;Store.data.randomPrefs.diff=b.dataset.v;Store.save();syncRandomUI();});
+  $('#randTheme').addEventListener('click',e=>{const b=e.target.closest('.seg-btn');if(!b)return;Store.data.randomPrefs.theme=b.dataset.v;Store.save();syncRandomUI();});
+  $('#btnGenerate').addEventListener('click',startRandom);
+  const setOpt=(id,key)=>$(id).addEventListener('change',e=>{Store.data.settings[key]=e.target.checked;Store.save();update(false);});
+  setOpt('#setLive','live');setOpt('#setColor','color');setOpt('#setSound','sound');
+  $('#btnRunTests').addEventListener('click',()=>{closeModal('modalSettings');withLoading('กำลังทดสอบระบบ…',runSystemTests);});
+  $('#btnResetProgress').addEventListener('click',resetProgress);
+  $('#confirmYes').addEventListener('click',()=>{const cb=confirmCb;confirmCb=null;closeModal('modalConfirm');
+    if(cb){try{cb();}catch(e){console.error(e);showError('เกิดข้อผิดพลาด: '+e.message);}}});
+  document.addEventListener('click',e=>{const c=e.target.closest('[data-close]');if(!c)return;const m=c.closest('.modal');if(m)closeModal(m.id);});
+  document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id);}));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){const open=[...document.querySelectorAll('.modal')].filter(m=>!m.hidden).pop();if(open)closeModal(open.id);return;}
+    if(anyModalOpen()||!$('#screenGame').classList.contains('active'))return;
+    const k=e.key.toLowerCase();
+    if((e.ctrlKey||e.metaKey)&&k==='z'&&!e.shiftKey){e.preventDefault();undo();}
+    else if((e.ctrlKey||e.metaKey)&&(k==='y'||(k==='z'&&e.shiftKey))){e.preventDefault();redo();}
+    else if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&k==='h'){useHint();}});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&App.P)saveProgress();});
+  window.addEventListener('pagehide',()=>{if(App.P)saveProgress();});}
+
+/* ================= Boot ================= */
+window.addEventListener('error',e=>{showError('เกิดข้อผิดพลาด: '+(e.message||'ไม่ทราบสาเหตุ'));});
+window.addEventListener('unhandledrejection',e=>{showError('เกิดข้อผิดพลาด: '+(e.reason&&e.reason.message?e.reason.message:e.reason));});
+function init(){
+  Store.load();
+  MainBoard=new BoardView($('#board'),'main');
+  drawRosette();bindBoardInput();bindUI();renderHome();
+  setInterval(tick,1000);
+  if(!Store.data.tutorialSeen)setTimeout(()=>openTutorial(0),450);}
+try{init();}catch(e){console.error(e);showError('เริ่มเกมไม่สำเร็จ: '+(e&&e.message?e.message:e));}
+</script>
+</body>
+</html>
